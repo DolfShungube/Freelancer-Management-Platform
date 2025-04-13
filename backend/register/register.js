@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
         registerBtn.value = "Register";  
 
         
-        registerBtn.disabled = false;
+       
         if(registerUserMessage === "User Registered"){
             form.reset();
             Swal.fire({
