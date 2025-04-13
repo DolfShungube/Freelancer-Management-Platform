@@ -43,13 +43,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
         
-        registerBtn.disabled = true;
-        registerBtn.value = "Loading..."; 
+       registerBtn.disabled = true;
+        registerBtn.innerText = "Loading..."; 
 
         const registerUserMessage = await registerUser(firstname, lastname, email, password, selectedtype);
 
         registerBtn.disabled = false;
-        registerBtn.value = "Register";  
+        registerBtn.innerText = "Register";
 
         
       
