@@ -23,7 +23,7 @@ const form= document.getElementById('form');
          
       if(value===''){
    
-        window.location.href = detailValues.userType+'.html';
+        window.location.href ="./frontend/src/pages/" +detailValues.userType+'.html';
 
       }else{
          showAlert(value,'error')

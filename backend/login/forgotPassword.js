@@ -30,9 +30,9 @@ form.addEventListener('submit',async (e)=>{
             
         }
 
-     window.location.href = `newPass.html?email=${encodeURIComponent(email)}`;
+     //window.location.href = `newPass.html?email=${encodeURIComponent(email)}`;
 
-    window.location.replace('index.html')
+    window.location.replace("../../../index.html")
 
 
 

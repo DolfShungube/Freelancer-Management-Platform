@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="./frontend/src/pages/style.css" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script type="module" src="../../../backend/login/signin.js" defer></script>
-  <script type="module" src="../../../backend/login/signinwithgoogle.js" defer></script>
+  <script type="module" src="./backend/login/signin.js" defer></script>
+  <script type="module" src="../backend/login/signinwithgoogle.js" defer></script>
 </head>
 <body>
 
@@ -26,7 +26,7 @@
       <option value="Freelancer">Freelancer</option>
     </select><br><br>
 
-    <a href="./changePassword.html" class="forgot-link">Forgot Password?</a>
+    <a href="./frontend/src/pages/changePassword.html" class="forgot-link">Forgot Password?</a>
 
     <button type="submit" id="SignIn" class="btn-black">Sign In</button><br><br>
 
@@ -35,7 +35,7 @@
       Sign In with Google
     </button>
 
-    <a href="Register.html" class="create-account">Create Account</a>
+    <a href="./frontend/src/pages/Register.html" class="create-account">Create Account</a>
 
   </form>
 

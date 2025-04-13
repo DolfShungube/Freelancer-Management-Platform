@@ -1,5 +1,6 @@
 import { validateInputs, registerUser } from './register_functions.js';
 
+
 document.addEventListener("DOMContentLoaded", function() {
     const usersMap = new Map();  
     const usertype = document.getElementById("AccountType");  
@@ -59,14 +60,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 icon: 'success',
                 confirmButtonText: 'OK'
             }).then(()=>{
-                window.location.href = "index.html";
+                window.location.href = "../../../index.html";
             });
             console.log("User Registered", usersMap);
             return usersMap;
         }else{
             showAlert(registerUserMessage, 'error');
         }
-        window.location.href = "index.html";   
+        window.location.href = "../../../index.html";   
         
     });
 });
