@@ -13,7 +13,7 @@ const selectedtype= document.getElementById('accountType').value;
       options: {
 
        // redirectTo: 'http://localhost:5500/frontend/src/pages/Client.html'
-        redirectTo: `${window.location.origin}/Freelancer-Management-Platform/+frontend/src/pages/Client.html`
+        redirectTo: `${window.location.origin}/Freelancer-Management-Platform/frontend/src/pages/Client.html`
 
 
       }
