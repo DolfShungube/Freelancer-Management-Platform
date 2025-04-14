@@ -5,6 +5,8 @@
   <title>Sign Up</title>
 
   <link rel="stylesheet" href="styles_register.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+  <script type="module" src="../../../backend/register/register.js" defer></script>
 </head>
 <body>
   
@@ -18,7 +20,7 @@
   
  
 
-  <form action="/register" method="post" class="form">
+  <form id="form" class="form">
     
     <!--<label for="First Names">First Names:</label><br>--><!--If you want OG design-->
     <input type="text" id="firstname" class="firstname" placeholder="Enter First Names" required style="width: 100%; padding: 10px; margin: 8px 0;"><br>
@@ -36,11 +38,11 @@
     <input type="password" id="password2" class="password" placeholder="Re-enter Password" required style="width: 100%; padding: 10px; margin: 8px 0;"><br>
 
     <!--<label for="Account Type">Account Type:</label><br>-->
-<select class="AccountType" id="Account Type"name="password" placeholder="Enter Password" required style="width: 100%; padding: 10px; margin: 8px 0;"><br>
+<select class="AccountType" id="AccountType"name="AccountType" placeholder="Enter Password" required style="width: 100%; padding: 10px; margin: 8px 0;"><br>
   <option value="">--Select Account Type--</option>
-  <option value="freelancer">Freelancer</option>
-  <option value="client">Client</option>
-  <option value="admin">Admin</option>
+  <option value="Freelancer">Freelancer</option>
+  <option value="Client">Client</option>
+  <option value="Admin">Admin</option>
 </select><br>
 <button type="submit" id="Register" class="register-button">Register</button><br><br>
     

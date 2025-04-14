@@ -16,6 +16,8 @@ function validateInputs(firstname, lastname, email, password, password2, selecte
 
 // change this one to insert user in the database and create user
 async function registerUser(firstname, lastname, email, password, selectedtype) {
+    console.log(firstname,lastname,email,selectedtype)
+
 
   
 
@@ -35,11 +37,9 @@ async function registerUser(firstname, lastname, email, password, selectedtype) 
 
     if(signUpError){
 
-
-        showAlert(signUpError.message,'error')
-        
-       // console.log("SignUp error", signUpError);
         return;
+    }else{
+        return "User Registered"
     }
  
     

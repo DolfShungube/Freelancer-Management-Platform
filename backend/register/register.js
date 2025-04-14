@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+
     
     form.addEventListener("submit", async function(event) {
         event.preventDefault(); 
@@ -40,17 +41,16 @@ document.addEventListener("DOMContentLoaded", function() {
             showAlert(validationMessage,'error')
         }
 
+
         
-        registerBtn.disabled = true;
-        registerBtn.value = "Loading..."; 
+       registerBtn.disabled = true;
+        registerBtn.innerText = "Loading..."; 
 
         const registerUserMessage = await registerUser(firstname, lastname, email, password, selectedtype);
 
         registerBtn.disabled = false;
-        registerBtn.value = "Register";  
+        registerBtn.innerText = "Register";
 
-        
-       
         if(registerUserMessage === "User Registered"){
             form.reset();
             Swal.fire({
@@ -59,14 +59,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 icon: 'success',
                 confirmButtonText: 'OK'
             }).then(()=>{
-                window.location.href = "index.html";
+                window.location.href = "./login.html";
             });
             console.log("User Registered", usersMap);
             return usersMap;
         }else{
             showAlert(registerUserMessage, 'error');
+            // window.location.href = "login.html";   
         }
-        window.location.href = "login.html";   
+
         
     });
 });
