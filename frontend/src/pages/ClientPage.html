@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Freelancio</title>
+  <link rel="stylesheet" href="ClientPageStyle.css" />
+</head>
+<body>
+
+  <form action="" class="form-header">
+    <h1>Freelancio.
+        <img src="coffee.png" alt="Freelancio Icon" style="width: 27px; vertical-align: baseline; margin-right: 8px;">
+    </h1>
+      <button id="search-icon"><img src="search plain.png" alt="Freelancio Icon" style="width: 23px; vertical-align: baseline; margin-right: 8px; margin-top: 7px;"></button>
+      <button id="menu-icon">☰</button>
+    </form>
+
+<form class="form-profile">
+    <img src="frontend/assets/profile.png" alt="Profile Picture" class="profile-pic" />
+    <section class="profile-text">
+        <p class="greeting">Hi, Name</p>
+        <p class="role">Client</p>
+      </section>
+  </form>
+  <section class="jobs">
+    <h2>Jobs</h2>
+  
+    <!-- This section will be dynamically generated -->
+    <ul class="job-list">
+      <!-- One job -->
+      <li>
+        <form class="job-card">
+          <h3>Job Title</h3>
+          <p class="progress-label">Progress</p>
+          <progress value="0" max="100"></progress>
+          
+        </form>
+      </li>
+  
+      <!-- More jobs will be added here -->
+    </ul>
+  </section>
+  <button type="submit" class="takejob-button">Add Job</button>
+  
+</body>
+</html>

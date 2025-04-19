@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Add Job - Freelancio</title>
+  <link rel="stylesheet" href="AddJobStyle.css" />
+</head>
+<body>
+  <form action="" class="form-header">
+    <h1>Freelancio.
+      <img src="coffee.png" alt="Freelancio Icon" style="width: 27px; vertical-align: baseline; margin-right: 8px;">
+    </h1>
+    <button id="search-icon"><img src="search plain.png" alt="Search Icon" style="width: 23px; vertical-align: baseline; margin-right: 8px; margin-top: 7px;"></button>
+    <button id="menu-icon">☰</button>
+  </form>
+  
+  <form class="add-job-form">
+    <h2>Add New Job</h2>
+    
+    <label for="project-name">Project Name</label>
+    <input type="text" id="project-name" placeholder="Enter project name" required>
+    
+    <label for="project-description">Project Description</label>
+    <textarea id="project-description" placeholder="Describe your project in detail" required></textarea>
+    
+    <label for="project-requirements">Project Requirements</label>
+    <textarea id="project-requirements" placeholder="List the skills, qualifications, and other requirements" required></textarea>
+    
+    <section class="actions">
+      <button type="button" class="cancel-button" onclick="history.back()">Cancel</button>
+      <button type="submit" class="submit-button">Add Job</button>
+    </section>
+  </form>
+</body>
+</html>
