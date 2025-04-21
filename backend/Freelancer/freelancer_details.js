@@ -26,7 +26,7 @@ const fetchinfo = async () => {
     FreelancerProfile.classList.add('profile-text');
 
     FreelancerProfile.innerHTML = `
-    <img src="${freelancer.profilepicture}" alt="Profile Picture" class="profile-pic" />
+    <img src="images/profile_picture.jpg" alt="Profile Picture" class="profile-pic" />
       <p class="greeting">Hi, ${freelancer.firstname} ${freelancer.lastname}</p>
       <p class="role">Freelancer</p>
     `;
