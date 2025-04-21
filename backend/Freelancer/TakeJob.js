@@ -38,7 +38,7 @@
 
       // You can also redirect or refresh the list after 2 seconds
       setTimeout(() => {
-        window.location.href = 'ViewJob.html'; // Replace with your jobs list page
+        window.location.href = 'Freelancer.html'; // Replace with your jobs list page
       }, 2000);
     }
   });
