@@ -1,24 +1,54 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="module" src="../../../backend/config/pageProtection.js"></script>
-    <script type="module" src="../../../backend/login/signout.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Freelancio</title>
+  <link rel="stylesheet" href="AdminS.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script type="module" src="../../../backend/Admin/users_admin.js"></script>
+
 </head>
 <body>
-    <header>
-        <button type="button" id="logOut" class="btn-black">Log out</button><br><br>
 
-    </header>
-    <main>
-        <h style="text-align: center;"><strong>Welcome to the Admin Page, we are busy working on giving you the best experience, please be patient(*3*)</strong></h>
-    </main>
-   
+  <nav class="navigation">
+    <h2 class="title">
+      Freelancio.
+      <img src="images/coffee.png" class="logo" alt="coffee logo" />
+    </h2>
+  </nav>
+
+  <p class="greeting"  style="font-size: 16px; color: #333;margin-top: 50px;margin-right: 50px; font-style:oblique;font-weight: bold; ">
+    <img class="profile-icon" src="images/profile_picture.png" alt="Profile icon" style="width: 100px; height: 100px;" />
     
+  </p>
+
+  <section id ="users" class="section-box">
+    <h3 class="section-title">👥 Users</h3>
+    <p class="no-tasks">No users yet.</p>
+  </section>
+
+  <section id ="admins" class="section-box">
+    <h3 class="section-title">🛡️ Admins</h3>
+    <p class="no-tasks">No admins yet.</p>
+
+    <form id="adminForm" class="admin-form" style="display: none;">
+      <input type="text" id="adminFName" placeholder="First Name" required />
+      <input type="text" id="adminLName" placeholder="Last Name" required />
+      <input type="email" id="adminEmail" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Enter password" required />
+      <select id="adminRole" required>
+        <option value="">Select Admin role</option>
+        <option value="Super Admin">Director</option>
+        <option value="Moderator">Moderator</option>
+      </select>
+      <button id="addAdmin" type="submit" class="add-btn">Submit</button>
+    </form>
+
+
+    <button id="buttonAdd" class="add-btn" onclick="toggleForm()">Add Admin</button>
+  </section>
+
 </body>
 </html>
