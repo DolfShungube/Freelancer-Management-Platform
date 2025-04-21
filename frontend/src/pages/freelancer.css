@@ -18,14 +18,12 @@ display: none;
 max-width: 400px;   
 margin: 20px auto; /* centers it and gives top spacing */
 margin-left: 25px;
-background: #fff;
 padding: 20px;
 border-radius: 8px;
-box-shadow: 0 0 10px rgba(0,0,0,0.05);
 display: flex;
 align-items: center;
 gap: 15px; /* adds space between image and text */
-margin-top: -150px;
+margin-top: -180px;
  
 }
 

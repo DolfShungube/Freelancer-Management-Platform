@@ -4,10 +4,7 @@
   <meta charset="UTF-8" />
   <title>Freelancio</title>
   <link rel="stylesheet" href="freelancer.css" />
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-   <script type="module" src="../../../backend/config/pageProtection.js"></script>
-  <script type="module" src="../../../backend/Freelancer/Jobs.js" defer></script>
-  <script type="module" src="../../../backend/Freelancer/freelancer_details.js" defer></script>
+  
   
 </head>
 <body>
@@ -16,7 +13,7 @@
     <h1>Freelancio.
         <img src="images/coffee.png" alt="Freelancio Icon" style="width: 27px; vertical-align: baseline; margin-right: 8px;">
     </h1>
-    <button id="search-icon"><img src="images/search_icon.jpeg" alt="Freelancio Icon" style="width: 23px; vertical-align: baseline; margin-right: 8px; margin-top: 7px;"></button>
+    <button id="search-icon"><img src="images/search.png" alt="Freelancio Icon" style="width: 23px; vertical-align: baseline; margin-right: 8px; margin-top: 7px;"></button>
     <button id="menu-icon">☰</button>
 
     </form>
@@ -29,13 +26,13 @@
       </section>
     
       <p class="progress-label">Progress</p>
-      <progress value="16" max="100"></progress>
+      <progress value="0" max="100"></progress>
     </form>
 
 </form>
 
 <form class="profile-info">
-  <img src="frontend/assets/profile.png" alt="Profile Picture" class="profile-pic" />
+  <img src="images/profile_picture.jpg" alt="Profile Picture" class="profile-pic" />
   <section class="profile-text">
       <p class="greeting">Hi,</p>
       <p class="role">Freelancer</p>
@@ -69,5 +66,8 @@
       </li>
     </ul>
   </section>
+
+  <script type="module" src="../../../backend/Freelancer/Jobs.js"></script>
+  <script type="module" src="../../../backend/Freelancer/freelancer_details.js"></script>
 </body>
 </html>
