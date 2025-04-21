@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <title>Add Job - Freelancio</title>
   <link rel="stylesheet" href="AddJobStyle.css" />
+  <script type="module" src="../../../backend/database/createjob.js" defer></script>
 </head>
 <body>
-  <form action="" class="form-header">
+  <form  action="" class="form-header">
     <h1>Freelancio.
       <img src="coffee.png" alt="Freelancio Icon" style="width: 27px; vertical-align: baseline; margin-right: 8px;">
     </h1>
@@ -14,7 +15,7 @@
     <button id="menu-icon">☰</button>
   </form>
   
-  <form class="add-job-form">
+  <form id='add' class="add-job-form">
     <h2>Add New Job</h2>
     
     <label for="project-name">Project Name</label>
@@ -23,12 +24,12 @@
     <label for="project-description">Project Description</label>
     <textarea id="project-description" placeholder="Describe your project in detail" required></textarea>
     
-    <label for="project-requirements">Project Requirements</label>
-    <textarea id="project-requirements" placeholder="List the skills, qualifications, and other requirements" required></textarea>
+    <label for="charge">Project Payment</label>
+    <input type="number" id="amount" placeholder="how much you willing to pay" required></textarea>
     
     <section class="actions">
       <button type="button" class="cancel-button" onclick="history.back()">Cancel</button>
-      <button type="submit" class="submit-button">Add Job</button>
+      <button id="addjob" type="submit" class="submit-button">Add Job</button>
     </section>
   </form>
 </body>

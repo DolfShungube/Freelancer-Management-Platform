@@ -118,6 +118,133 @@ export async function handleUserInput(detailValues){
 }
 
 
+export function mainIcon(){
+
+    document.addEventListener('click', (e) => {
+        const isClickInsideDropdown = details.contains(e.target);
+        const isClickOnIcon = icon.contains(e.target);
+      
+        if (!isClickInsideDropdown && !isClickOnIcon) {
+          details.classList.add('hidden');
+        }
+      })
+
+    const details=document.createElement('section')
+          details.id="dropdowmmenu"
+          details.className = "dropdown hidden";
+
+
+    const list=document.createElement("ul")
+
+    const item1=document.createElement("li")
+            item1.id="reportissue"
+            item1.textContent="Report issue"
+    const item2=document.createElement("li")
+            item2.id="logout"
+            item2.textContent="Logout"
+
+    //details.append(list,item1,item2)
+    list.append(item1,item2)
+    details.appendChild(list)
+    document.body.appendChild(details);
+
+
+    item1.addEventListener('click',async(e)=>{
+        showAlert("the report issue function is currently offline","error")
+    })
+
+    item2.addEventListener('click',async(e)=>{
+        try {
+            const { error } = await supabase.auth.signOut();
+            if (error) throw error;
+            window.location.replace('./login.html');
+          } catch (error) {
+            showAlert(error.message, 'error');
+          }
+        })
+
+
+        const icon = document.getElementById("menu-icon");
+        icon.addEventListener('click', () => {
+            const iconRect = icon.getBoundingClientRect();
+            details.style.position = "absolute";
+            details.style.top = `${iconRect.bottom + window.scrollY}px`;
+            details.style.left = `${iconRect.left + window.scrollX-70}px`;
+            details.classList.toggle('hidden');         
+
+  });
+
+    
+    
+        // const details=document.createElement('select');
+        // details.id = "menu";
+        // details.style.position ='absolute'
+        // details.style.top = '50px'
+        // details.style.right = '10px'
+
+        // const defaultOption = document.createElement('option');
+        // defaultOption.text = '-- Menu --';
+        // defaultOption.disabled = true;
+        // defaultOption.selected = true;
+
+        // const report=document.createElement('option');
+        // report.value="Issue"
+        // report.text="Report issue"
+        // const logout=document.createElement('option');
+        // logout.value="logout"
+        // logout.text="Logout"
+
+        // details.append(defaultOption,report,logout)
+        // document.body.appendChild(details)
+
+        // document.getElementById("logout").addEventListener('click', async () => {
+        //     try {
+        //       const { error } = await supabase.auth.signOut();
+        //       if (error) throw error;
+        //       window.location.replace('./login.html');
+        //     } catch (error) {
+        //       showAlert(error.message, 'error');
+        //     }
+        //   });
+
+
+        // details.addEventListener('change', async(e)=>{
+
+        //     const selected = e.target.value;
+
+        //     if (selected === "logout") {
+        //         try {
+        //             const { error } = await supabase.auth.signOut();
+        //             if (error){
+        //                 showAlert(error.message, 'error');
+        //                 return
+
+        //             };
+        //             window.location.replace('./login.html');
+        //         } catch (error) {
+        //             showAlert(error.message, 'error');
+                    
+        //         }
+        //     }
+        //     else if(selected === "Issue"){
+
+        //         showAlert("the report issue function is currently offline","error")
+
+
+        //     }
+        //     details.remove();
+
+
+
+        // })
+
+
+// })
+
+
+}
+
+
 
 
 
