@@ -1,21 +1,47 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="module" src="../../../backend/config/pageProtection.js"></script>
-    <script type="module" src="../../../backend/login/signout.js" defer></script>
-    <title>Client</title>
+  <meta charset="UTF-8" />
+  <title>Freelancio</title>
+  <link rel="stylesheet" href="ClientPageStyle.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script type="module" src="../../../backend/config/pageProtection.js"></script>
+  <script type="module" src="../../../backend/database/loadclient.js" defer></script>
+  <script type="module" src="../../../backend/login/signout.js" defer></script>
+
 </head>
 <body>
-    <header>
-        <button type="button" id="logOut" class="btn-black">Log out</button><br><br>
 
-    </header>
+  <form action="" class="form-header">
+    <h1>Freelancio.
+        <img src="./images/coffee.png" alt="Freelancio Icon" style="width: 27px; vertical-align: baseline; margin-right: 8px;">
+    </h1>
+      <button id="search-icon"><img src="./images/coffee.png" alt="Freelancio Icon" style="width: 23px; vertical-align: baseline; margin-right: 8px; margin-top: 7px;"></button>
+      <button type="button" id="menu-icon">☰</button>
+    </form>
 
-    <main>
-    <h style="text-align: center;"><strong>Welcome to the Client Page, we are busy working on giving you the best experience, please be patient(*3*)</strong></h>
-    </main>
+<form class="form-profile">
+    <img src="./images/profile_picture.jpg" alt="Profile Picture" class="profile-pic" />
+    <section class="profile-text">
+        <p id="userName" class="greeting">Hi, Name</p>
+        <p class="role">Client</p>
+      </section>
+  </form>
+  <section class="jobs">
+    <h2>Jobs</h2>
+  
+    <!-- This section will be dynamically generated -->
+    <ul id="joblist" class="job-list">
+      <!-- One job -->
+      <li id="myjobs">
+
+      </li>
+  
+      <!-- More jobs will be added here -->
+    </ul>
+  </section>
+  <button id="addJob" type="button" class="takejob-button">Add Job</button>
+  
 </body>
 </html>
