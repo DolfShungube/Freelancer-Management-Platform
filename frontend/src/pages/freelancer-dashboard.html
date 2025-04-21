@@ -4,51 +4,67 @@
   <meta charset="UTF-8" />
   <title>Freelancio</title>
   <link rel="stylesheet" href="freelancer.css" />
+  <script type="module" src="../../../backend/Freelancer/Jobs.js" defer></script>
+  <script type="module" src="../../../backend/Freelancer/freelancer_details.js" defer></script>
+  
 </head>
 <body>
 
   <form action="" class="form-header">
     <h1>Freelancio.
-        <img src="cofee.png" alt="Freelancio Icon" style="width: 27px; vertical-align: baseline; margin-right: 8px;">
+        <img src="images/coffee.png" alt="Freelancio Icon" style="width: 27px; vertical-align: baseline; margin-right: 8px;">
     </h1>
-    <button id="search-icon"><img src="search plain.png" alt="Freelancio Icon" style="width: 23px; vertical-align: baseline; margin-right: 8px; margin-top: 7px;"></button>
+    <button id="search-icon"><img src="images/search_icon.jpeg" alt="Freelancio Icon" style="width: 23px; vertical-align: baseline; margin-right: 8px; margin-top: 7px;"></button>
     <button id="menu-icon">☰</button>
 
     </form>
 
+  
     <form class="form-progress">
-        <section class="job-info">
-          <p class="label">Current Job:</p>
-          <p class="job-title">Job Title </p>
-        </section>
-      
-        <p class="progress-label">Progress</p>
-        <progress value="50" max="100"></progress>
-      </form>
+      <section class="job-info">
+        <p class="label">Current Job:</p>
+        <p class="job-title">Job Title </p>
+      </section>
+    
+      <p class="progress-label">Progress</p>
+      <progress value="16" max="100"></progress>
+    </form>
 
 </form>
-<section class="profile-info">
-  <img src="profile.jpg" alt="Profile Picture" class="profile-pic" />
+
+<form class="profile-info">
+  <img src="frontend/assets/profile.png" alt="Profile Picture" class="profile-pic" />
   <section class="profile-text">
-    <p class="greeting">Hi, Name</p>
-    <p class="role">Freelancer</p>
-  </section>
-</section>
+      <p class="greeting">Hi,</p>
+      <p class="role">Freelancer</p>
+    </section>
+</form>
+
+
+
+
+
   <section class="form-available-jobs">
     <h2>Available Jobs</h2>
   
     <!-- This section will be dynamically generated -->
     <ul class="job-list">
-      <!-- One job -->
       <li>
         <form class="job-card">
           <h3>Job Title</h3>
-          <p>What is the job about and all that.......</p>
-          <button type="submit">View Details</button>
+          
+          
+      
+          <!-- Hidden details using <p> only -->
+            <p class="description hidden">What is the job about and all that.......</p>
+          <p class="clientDetails hidden">The details of the client........</p>
+          <p class="clientName hidden">clientName:.......</p>
+          <p class="clientLastname hidden">clientLastNAme.........</p>
+      
+          <button type="button" class="view-details-btn">View Details</button>
+          
         </form>
       </li>
-  
-      <!-- More jobs will be added here -->
     </ul>
   </section>
 </body>
