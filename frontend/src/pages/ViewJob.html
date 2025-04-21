@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <title>Freelancio</title>
   <link rel="stylesheet" href="ViewFreelancer.css" />
+  <script type="module" src="../../../backend/Freelancer/Jobs.js" defer></script>
+  <script type="module" src="../../../backend/Freelancer/TakeJob.js" defer></script>
 </head>
 <body>
     <form action="" class="form-header">
@@ -26,14 +28,14 @@
             <img src="profile.jpg" alt="Client Profile Picture" class="client-pic">
             <section class="client-text">
               <p class="client-label">Client:</p>
-              <p class="client-name">Name of Client</p>
+              <p class="client-name" id="client-name">Name of Client</p>
             </section>
           </section>
         
           <!-- Job Description -->
           <section class="job-description">
             <p class="description-label">Job Description</p>
-            <p class="description-text">
+            <p class="description-text" id="description-text">
              Description of the job
             </p>
           </section>
@@ -48,5 +50,8 @@
           <button type="submit">Take Job</button>
         
         </form>
+
+
+        
 
 </body>
