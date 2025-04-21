@@ -1,22 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freelancer</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="module" src="../../../backend/config/pageProtection.js"></script>
-    <script type="module" src="../../../backend/login/signout.js" defer></script>
+  <meta charset="UTF-8" />
+  <title>Freelancio</title>
+  <link rel="stylesheet" href="ViewFreelancer.css" />
+  <script type="module" src="../../../backend/Freelancer/Jobs.js" defer></script>
+  <script type="module" src="../../../backend/Freelancer/TakeJob.js" defer></script>
 </head>
 <body>
-    <header>
-        <button type="button" id="logOut" class="btn-black">Log out</button><br><br>
+    <form action="" class="form-header">
+        <h1>Freelancio.
+            <img src="coffee.png" alt="Freelancio Icon" style="width: 27px; vertical-align: baseline; margin-right: 8px;">
+        </h1>
+        <button id="search-icon">🔍</button>
+        <button id="menu-icon">☰</button>
+    
+        </form>
+        <form class="form-job-info">
 
-    </header>
+        
+          <header class="job-title">
+            <h2>What is the job</h2>
+          </header>
+        
+         
+          <section class="client-profile">
+            <img src="profile.jpg" alt="Client Profile Picture" class="client-pic">
+            <section class="client-text">
+              <p class="client-label">Client:</p>
+              <p class="client-name" id="client-name">Name of Client</p>
+            </section>
+          </section>
+        
+          <!-- Job Description -->
+          <section class="job-description">
+            <p class="description-label">Job Description</p>
+            <p class="description-text" id="description-text">
+             Description of the job
+            </p>
+          </section>
+        
+          <!-- Job Requirements -->
+          <section class="job-requirements">
+            <p class="requirements-label">Job Requirements</p>
+            <p class="requirements-text">
+             Job requirements.....
+            </p>
+          </section>
+          <button type="submit">Take Job</button>
+        
+        </form>
 
-    <main>
-    <h style="text-align: center;"><strong>Welcome to the Freelancer Page, we are busy working on giving you the best experience, please be patient(*3*)</strong></h>
-    </main> 
+
+        
 
 </body>
-</html>
