@@ -47,7 +47,7 @@ const user=loaduser('Client')
 const addjob= document.getElementById('addJob')
 
 addjob.addEventListener('click',async (e)=>{
-    window.location.href = 'Addjob.html';
+    window.location.href = './Addjob.html';
 })
 
 
