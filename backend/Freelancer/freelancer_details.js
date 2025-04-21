@@ -2,39 +2,42 @@ import supabase from '../config/superbaseClient.js';
 
 const fetchinfo = async () => {
   const Freelancer_info = document.querySelector('.profile-info');
-  const {data:{user},error:authError} = await supabase.auth.getUser();
+
+  // Get the currently logged-in user
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+
+  if (authError || !user) {
+    Freelancer_info.innerHTML = '<p>Not logged in.</p>';
+    console.error(authError);
+    return;
+  }
+
+  // Fetch freelancer details by user ID
   const { data, error } = await supabase
     .from('Freelancer')
     .select("*")
     .eq("id", user.id)
-    .single()
+    .single();
 
-  if (error) {
+  if (error || !data) {
     Freelancer_info.innerHTML = '<p>Could not find profile.</p>';
     console.error(error);
-    return;
-  }
-
-  if (data.length === 0) {
-    Freelancer_info.innerHTML = '<p>Profile details are not available.</p>';
     return;
   }
 
   // Clear any existing content
   Freelancer_info.innerHTML = '';
 
-  data.forEach(freelancer => {
-    const FreelancerProfile = document.createElement('section');
-    FreelancerProfile.classList.add('profile-text');
+  const FreelancerProfile = document.createElement('section');
+  FreelancerProfile.classList.add('profile-text');
 
-    FreelancerProfile.innerHTML = `
-    <img src="${freelancer.profilepicture}" alt="Profile Picture" class="profile-pic" />
-      <p class="greeting">Hi, ${freelancer.firstname} ${freelancer.lastname}</p>
-      <p class="role">Freelancer</p>
-    `;
+  FreelancerProfile.innerHTML = `
+    <img src="${data.profilepicture || 'images/profile_picture.jpg'}" alt="Profile Picture" class="profile-pic" />
+    <p class="greeting">Hi, ${data.firstname} ${data.lastname}</p>
+    <p class="role">Freelancer</p>
+  `;
 
-    Freelancer_info.appendChild(FreelancerProfile);
-  });
+  Freelancer_info.appendChild(FreelancerProfile);
 };
 
 fetchinfo(); // Call the function when the script loads
