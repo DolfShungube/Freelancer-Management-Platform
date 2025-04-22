@@ -93,7 +93,7 @@ test("if a job is available a freelancer should be able to accept it",()=>{
 })
 
 test("if a job is not available a freelancer should not be able to accept it",()=>{
-    const result = jobs({status:"free",description:"description"});
+    const result = jobs({status:"notfree",description:"description"});
     expect(result).toEqual("taken")
     
 })
