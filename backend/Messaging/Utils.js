@@ -1,4 +1,4 @@
-import superbase from '../config/superbaseClient.js'
+import supabase from '../config/superbaseClient.js'
 //change the below lines to getdocumentbyid if required :)
 const messageList= document.querySelector('message')
 const writeNewMessage=document.querySelector('newmessage')
@@ -29,7 +29,7 @@ class Messages {
         //getting all the massages between freelancer and client for a specific job
 
         try {
-             const {data:messages,error}= await superbase
+             const {data:messages,error}= await supabase
             .from('Messages')
             .select('*')
             .match({ clientID: this.clientID, freelancerID: this.freelancerID,projectID:this.projectID });  
@@ -81,7 +81,7 @@ class Messages {
         
 
         try {
-            const{data,error}= await superbase
+            const{data,error}= await supabase
                 .from('Messages')
                 .insert([
                         {message:message,clientID:clientID,projectID:projectID,sentBY:sentBY }
@@ -109,7 +109,7 @@ class Messages {
         //run after calling createmessage
   
         try {
-            const {data:messages,error}= await superbase
+            const {data:messages,error}= await supabase
 
             .channel('new message')
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'Messages' }, (payload) => {
