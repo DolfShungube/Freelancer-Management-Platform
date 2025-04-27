@@ -27,7 +27,7 @@
       console.error(error);
     } else {
       // Success feedback: cool animation or message
-      const button = e.target.querySelector('button[type="submit"]');
+      const button = document.getElementById('apply-btn');
       button.textContent = '🎉 Job Taken!';
       button.disabled = true;
 
