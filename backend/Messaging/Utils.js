@@ -3,6 +3,7 @@ import supabase from '../config/superbaseClient.js'
 const messageList= document.querySelector('message')
 const writeNewMessage=document.querySelector('newmessage')
 //add show alert later
+
 //add superbase realtime
 //styles for messages page to allow auto scroll
 //sentBY== false means sent by client
@@ -56,14 +57,14 @@ class Messages {
 
         //adding each fetched message to the page with massages
 
-        const list= document.createElement('li');
-
-        list.innerHTML=`
-        <p>${message.message}</p>
-        <p>${message.created_at}</p>
-               `
-        messageList.append(list)
-        messageList.scrollIntoView({behavior: 'smooth'},300)
+        const article = document.createElement('article');
+        article.classList.add(message.sentBY ? 'sent' : 'received');
+        article.innerHTML = `
+        ${message.message}
+        <time>${new Date(message.created_at).toLocaleTimeString()}</time>
+        `;
+        messageList.appendChild(article);
+        messageList.scrollTop = messageList.scrollHeight; // Auto scroll to bottom
 
     }
 
@@ -79,16 +80,26 @@ class Messages {
         // adding a new message to the database
         //sentBy takes true or false, if false messege was sent by a client
         
-
+        console.log("Sender/Receiver:",clientID)
+        console.log("Sender/Receiver:",freelancerID)
+        console.log("ProjectId",projectID)
+        console.log('Such message:',message)
+        console.log("True=Freelancer/False=Client:",sentBY)
         try {
             const{data,error}= await supabase
                 .from('Messages')
                 .insert([
-                        {message:message,clientID:clientID,projectID:projectID,sentBY:sentBY }
+                        {   message:message,
+                            clientID:clientID,
+                            freelancerID:freelancerID,
+                            projectID:projectID,
+                            sentBY:sentBY
+                        }
                         ])
             
             if(error){
                 this.showAlert(error.message,'error');
+                console.log("Failed to insert data",error)
                 return
             }
             return data
@@ -133,3 +144,5 @@ class Messages {
 
 
 }
+
+export { Messages };

@@ -76,7 +76,8 @@ export async function userProfile(userID,userType){
             
         const {data,error}= await superbase
             .from(userType)
-            .select()
+            .select('*')
+            .eq('id',userID)
 
             if(error){
                 issue=error.message

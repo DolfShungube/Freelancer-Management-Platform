@@ -34,8 +34,12 @@ const fetchJobs = async () => {
     jobCard.innerHTML = `
       <form class="job-card">
         <h3>${job.jobName}</h3>
-        <button type="button" class="view-details-btn">View Details</button>
+    <button type="button" class="view-details-btn" style="padding: 0.5rem rem;">
+      View Details
+    </button>
+  
       </form>
+    
     `;
 
     const viewBtn = jobCard.querySelector('.view-details-btn');
