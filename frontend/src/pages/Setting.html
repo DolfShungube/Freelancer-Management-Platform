@@ -4,40 +4,54 @@
   <meta charset="UTF-8">
   <title>Account Settings</title>
   <link rel="stylesheet" href="AccountSettings.css">
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+  <script type="module" src="../../../backend/Freelancer/Setting.js" defer></script>
+
 </head>
 <body>
   <header>
     <h1>Account Settings</h1>
   </header>
-    <section class="settings-section">
-      <h2>Profile Information</h2>
-      
-      <article class="setting-item">
-        <p>Name: Light Yagami</p>
-        <button class="settings-button">Edit</button>
-      </article>
-      
-      <article class="setting-item">
-        <p>Email: IAMKIRA@example.com</p>
-        <button class="settings-button">Change</button>
-      </article>
-      
-      <article class="setting-item">
-        <p>Password: ********</p>
-        <button class="settings-button">Reset</button>
-      </article>
-    </section>
+
+  <section class="settings-section">
+    <h2>Profile Information</h2>
     
-    <section class="settings-section">
-      <h2>Preferences</h2>
-      
-      <article class="setting-item">
-        <label for="theme-select">Theme:</label>
-        <select id="theme-select" class="theme-select">
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
-        </select>
-      </article>
-    </section>
+    <article class="setting-item">
+      <p id="name-display">Name: Light Yagami</p>
+      <input id="name-input" class="hidden" type="text">
+      <button class="settings-button" onclick="toggleEdit('name')">Edit</button>
+    </article>
+    
+    <article class="setting-item">
+      <p id="email-display">Email: IAMKIRA@example.com</p>
+      <input id="email-input" class="hidden" type="email">
+      <button class="settings-button" onclick="toggleEdit('email')">Change</button>
+    </article>
+    
+    <article class="setting-item">
+      <p id="password-display">Password: ********</p>
+      <input id="password-input" class="hidden" type="password" placeholder="Enter new password">
+      <button class="settings-button" onclick="toggleEdit('password')">Reset</button>
+    </article>
+  </section>
+
+  <section class="settings-section">
+    <h2>Preferences</h2>
+    
+    <article class="setting-item">
+      <label for="theme-select">Theme:</label>
+      <select id="theme-select" class="theme-select">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </article>
+  </section>
+
+  <!-- Link the JavaScript file -->
+  <script type="module" src="script.js"></script>
 </body>
 </html>
