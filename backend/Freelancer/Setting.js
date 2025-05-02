@@ -42,5 +42,6 @@ async function updateProfile(field, value) {
     console.error("Update failed:", error);
   } else {
     console.log(`${field} updated to ${value}`);
+    fetchinfo();
   }
 }
