@@ -76,7 +76,8 @@ export async function userProfile(userID,userType){
             
         const {data,error}= await superbase
             .from(userType)
-            .select()
+            .select('*')
+            .eq('id',userID)
 
             if(error){
                 issue=error.message
@@ -237,9 +238,36 @@ export async function  viewJobs(jobs) {
 
     `
     showdetails.addEventListener('click', () => {
-        const showing = details.style.display === 'block';
-        details.style.display = showing ? 'none' : 'block';
-        showdetails.textContent = showing ? 'Details' : 'Less';
+        console.log(job,"from load")
+        if(job.assigned!=false){
+
+            // go to page to view progres
+            localStorage.setItem('jobID', job.id);
+            localStorage.setItem('jobName',job.jobName)
+            localStorage.setItem('jobDescription',job.description)
+            localStorage.setItem('assignedFreelancer',job.freelancerID)
+            localStorage.setItem('client',job.clientID)
+            localStorage.setItem('job',JSON.stringify(job))
+            localStorage.setItem('userType','Client')
+            
+
+            window.location.href = './progress.html'; 
+            
+            // const showing = details.style.display === 'block';
+            // details.style.display = showing ? 'none' : 'block';
+            // showdetails.textContent = showing ? 'Details' : 'Less';
+
+        }else{
+            localStorage.setItem('jobID', job.id);
+            localStorage.setItem('jobName',job.jobName)
+            localStorage.setItem('jobDescription',job.description)
+            localStorage.setItem('assignedFreelancer',job.freelancerID)
+            localStorage.setItem('client',job.clientID)
+
+            //go to aplications
+            window.location.href = './Aplication.html';   
+
+        }
       })
 
       form.append(jobname, showdetails, details);

@@ -1,0 +1,202 @@
+.myjobs-header {
+    display: flex;
+    align-items: center;
+    gap: 400px;
+    /* justify-content: space-between; */
+    
+  }
+
+  .myjobs-header h2 {
+    margin: 0;
+  }
+
+  .created-jobs {
+    /* color: #050000; */
+    max-height: 300px;
+    max-width: 600px;
+    min-width: 250px;
+  
+    scrollbar-width: none; 
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    overflow-x: auto;           /* Allows items to wrap to the next line */
+    gap: 20px;                 /* Space between the boxes */
+    margin: 15px;
+    list-style: none;
+    scroll-behavior: smooth;
+    border: 1px solid #cccccc;      /* Light gray border */
+    margin-bottom: 10px;         /* Space between boxes */
+    border-radius: 30px;          /* Rounded corners (optional) */
+    background-color: #f9f9f9;
+    
+  }
+
+  .scrollableList{
+    scrollbar-width: none; 
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    overflow-x: auto;           /* Allows items to wrap to the next line */
+    scroll-behavior: smooth;
+
+
+  }
+
+  
+
+  .created-jobs::-webkit-scrollbar {
+    display: none;  
+    height: 8px;
+  }
+
+  .rowStucture{
+    display: flex;
+   flex-wrap: nowrap;
+   justify-content: space-between;
+   border: 1px solid #cccccc;
+   border-radius: 20px;  
+   gap: 20px;;
+  }
+
+
+
+  .created-jobs li h1 {
+    display: flex;
+    margin: 0;
+    justify-content: center;
+    align-items: center; 
+  }
+
+  .created-jobs li button {
+    display: block;
+    margin: auto;
+  }
+  .taskinfo{
+    display: flex;
+    align-items: center; /* vertically align image and text */
+    gap: 10px; 
+  }
+
+  .created-jobs::-webkit-scrollbar {
+    display: none;  
+  }
+
+  .sideButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* horizontally center the buttons */
+    align-items: center;     /* vertically center the buttons */
+    gap: 60px; 
+    padding-right: 100px;
+                  /* spacing between buttons */
+           /* or any height you need */
+  }
+
+
+
+
+
+  html, body {
+    margin: 0;
+    font-family: sans-serif;
+    /* background-color: #000; */
+     color: #580cd1;  
+     background-image: url('./images/backg2.jpg'); /* or a full URL */
+    background-size: cover;           /* makes it fill the screen */
+    background-repeat: no-repeat;     /* no tiling */
+    background-position: center center;
+    background-attachment: fixed;            /*optional: makes text readable on black */
+  }
+  
+
+  
+  .main-layout {
+    margin-left: 100px;
+    display: flex;
+
+
+
+  }
+
+  @media (max-width: 768px) {
+    .main-layout {
+      flex-direction: column;       /* Stack vertically */
+      margin-left: 20px;            /* Smaller margin */
+      margin-right: 20px;
+      margin-top: 20px;
+      gap: 20px;
+    }
+  }
+  
+
+  .task-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 4px 15px;
+    font-size: 16px;
+    background-color: #6c7e91;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .task-button:hover {
+    background-color: #0056b3;
+  }
+
+  .Hover:hover{
+    border-radius: 8px;
+    background-color: #0056b3;
+  }
+
+  .icon-button svg {
+    width: 24px;
+    height: 24px;
+    color: white; 
+  }
+
+  .taskDonutChart {
+    display: block;          /* removes inline spacing */
+    margin: 0;               /* removes default margins */
+    padding: 0;              /* removes padding */
+    border: none;            /* if a border is present */
+    box-sizing: content-box; /* ensure size reflects canvas size only */
+    width: 100px;
+    height: 100px;
+  }
+
+
+  .dropdown {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 130px;
+    z-index: 9999;
+  }
+  
+  .dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .dropdown li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .dropdown li:last-child {
+    border-bottom: none;
+  }
+  
+  .dropdown li:hover {
+    background-color: #f0f0f0;
+  }
+
+

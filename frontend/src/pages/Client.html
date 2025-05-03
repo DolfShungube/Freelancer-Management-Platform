@@ -1,49 +1,158 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Freelancio</title>
-  <link rel="stylesheet" href="ClientPageStyle.css" />
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script type="module" src="../../../backend/config/pageProtection.js"></script>
-  <script type="module" src="../../../backend/database/loadclient.js" defer></script>
-  <script type="module" src="../../../backend/login/signout.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClientPage</title>
+    <link rel="stylesheet" href="./Client.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="../../../backend/config/pageProtection.js"></script>
+    <script type="module" src="../../../backend/database/loadclient.js" defer></script>
+    <script type="module" src="../../../backend/login/signout.js" defer></script>
 
 </head>
 <body>
+    <header>
+        <h1>Welcome Back,<p id="userName">UserName</p></h1>
+        <p>let's do the best we can today</p>
+    </header>
 
-  <form action="" class="form-header">
-    <h1>Freelancio.
-        <img src="./images/coffee.png" alt="Freelancio Icon" style="width: 27px; vertical-align: baseline; margin-right: 8px;">
-    </h1>
-      <button id="search-icon"><img src="images/search.png" alt="Freelancio Icon" style="width: 23px; vertical-align: baseline; margin-right: 8px; margin-top: 7px;"></button>
-      <button type="button" id="menu-icon">☰</button>
-    </form>
+    <main class="main-layout">
 
-<form class="form-profile">
-  <a href="Setting.html">
-    <img src="./images/profile_picture.jpg" alt="Profile Picture" class="profile-pic" style="cursor: pointer;"/>
-  </a>
-    <section class="profile-text">
-        <p id="userName" class="greeting">Hi, Name</p>
-        <p class="role">Client</p>
-      </section>
-  </form>
-  <section class="jobs">
-    <h2>Jobs</h2>
-  
-    <!-- This section will be dynamically generated -->
-    <ul id="joblist" class="job-list">
-      <!-- One job -->
-      <li id="myjobs">
+        <aside class="sidebar">
+            <ul>
+              <li><a href="./Setting.html">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+              </svg>
+            </a></li>
 
-      </li>
-  
-      <!-- More jobs will be added here -->
-    </ul>
-  </section>
-  <button id="addJob" type="button" class="takejob-button">Add Job</button>
-  
+              <li>
+                <a href="#" >
+                <svg type="button" id="logout" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                 <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+                <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+               </svg>
+               </a>
+             </li>
+            </ul>
+          </aside>
+
+        <section class="content-area">
+
+        <section >
+            <section class="myjobs-header">
+                <h2>My Jobs</h2>
+                <button class="task-button" id="addJob">
+                   New job
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                  </svg>
+                </button>     
+            </section>
+
+            <ul id="joblist" class="created-jobs">
+                <li id="job">
+            <p> the jobs the client has created</p>
+                </li>
+
+                <li id="job">
+                    <p> the jobs the client has created 2</p>
+                </li>
+
+                <li id="job">
+                    <p> the jobs the client has created 2</p>
+                </li>
+                <li id="job">
+                    <p> the jobs the client has created 2</p>
+                </li>
+
+                <li id="job">
+                    <p> the jobs the client has created 2</p>
+                </li>
+
+                <li id="job">
+                    <p> the jobs the client has created 2</p>
+                </li>
+
+                <li id="job">
+                    <p> the jobs the client has created 2</p>
+                </li>
+            </ul>
+
+        </section>
+
+        <section>
+            <h3>Active Jobs</h3>
+                <ul id="active-jobs" class="created-jobs">
+
+
+                </ul>
+
+        </section>
+
+        </section>
+
+        <section class="stats">
+            <h2>My stats</h2>
+            <canvas id="taskDonutChart" width="300" height="300"></canvas>
+
+
+          </section>
+
+
+
+
+
+
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const ctx = document.getElementById('taskDonutChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Open', 'In Progress', 'Assigned'],
+          datasets: [{
+            data: [12, 7, 5],
+            backgroundColor: ['#4CAF50', '#FFC107', '#F44336'],
+            borderWidth: 2
+          }]
+        },
+        options: {
+          cutout: '60%', // Controls the hole size
+          plugins: {
+            legend: {
+      position: 'right', // <- Move legend to the right
+      labels: {
+        color: '#580cd1',
+        boxWidth: 20,
+        padding: 20
+      }
+    },
+
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  let label = context.label || '';
+                  let value = context.parsed;
+                  let total = context.chart._metasets[context.datasetIndex].total;
+                  let percentage = ((value / total) * 100).toFixed(1);
+                  return `${label}: ${value} (${percentage}%)`;
+                }
+              }
+            }
+          }
+        }
+      });
+    </script>
+    
 </body>
+
 </html>
+
