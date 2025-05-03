@@ -1,46 +1,78 @@
-import supabase  from "../config/superbaseClient.js";
+import supabase from '../config/superbaseClient.js';
 
+// Fetch user data and populate the fields
+const fetchUserNames = async () => {
+  const firstnameDisplay = document.getElementById('firstname-display');
+  const lastnameDisplay = document.getElementById('lastname-display');
+  const firstnameInput = document.getElementById('firstname-input');
+  const lastnameInput = document.getElementById('lastname-input');
 
-// Function to toggle the input field for editing
-window.toggleEdit = function(field) {
-  const p = document.getElementById(`${field}-display`);
+  // Get current user
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+
+  if (authError || !user) {
+    firstnameDisplay.textContent = 'First Name: Not logged in';
+    lastnameDisplay.textContent = 'Last Name: Not logged in';
+    console.error(authError);
+    return;
+  }
+
+  // Fetch names from the 'Freelancer' table
+  const { data, error } = await supabase
+    .from('Freelancer')
+    .select('firstname, lastname')
+    .eq('id', user.id)
+    .single();
+
+  if (error || !data) {
+    firstnameDisplay.textContent = 'First Name: Not found';
+    lastnameDisplay.textContent = 'Last Name: Not found';
+    console.error(error);
+    return;
+  }
+
+  // Set display and input values
+  firstnameDisplay.textContent = `First Name: ${data.firstname}`;
+  lastnameDisplay.textContent = `Last Name: ${data.lastname}`;
+  firstnameInput.value = data.firstname;
+  lastnameInput.value = data.lastname;
+};
+
+// Toggle edit mode and update name
+window.toggleEdit = async (field) => {
+  const display = document.getElementById(`${field}-display`);
   const input = document.getElementById(`${field}-input`);
-  const button = p.nextElementSibling.nextElementSibling || p.nextElementSibling;
 
+  // If input is hidden, show it
   if (input.classList.contains('hidden')) {
-    // Extract the text after the colon
-    const currentText = p.textContent.split(':')[1].trim();
-    input.value = currentText;
-    p.classList.add('hidden');
     input.classList.remove('hidden');
-    button.textContent = 'Save';
+    input.focus();
   } else {
-    // Update the <p> text with the new input value
-    const label = p.textContent.split(':')[0];
-    const newValue = field === 'password' ? '********' : input.value;
-    p.textContent = `${label}: ${newValue}`;
+    // Update in Supabase
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    if (authError || !user) {
+      console.error('User not authenticated');
+      return;
+    }
+
+    const updateData = {};
+    updateData[field] = input.value;
+
+    const { error } = await supabase
+      .from('Freelancer')
+      .update(updateData)
+      .eq('id', user.id);
+
+    if (error) {
+      console.error(`Failed to update ${field}:`, error);
+      return;
+    }
+
+    // Update frontend display
+    display.textContent = `${field.charAt(0).toUpperCase() + field.slice(1)}: ${input.value}`;
     input.classList.add('hidden');
-    p.classList.remove('hidden');
-    button.textContent = field === 'name' ? 'Edit' : field === 'email' ? 'Change' : 'Reset';
-    
-    // Update profile in Supabase
-    updateProfile(field, newValue);
   }
 };
 
-// Function to update user profile data in Supabase
-async function updateProfile(field, value) {
-  const { data: { user } } = await supabase.auth.getUser();
-  const userId = user.id;
-
-  const { error } = await supabase
-    .from('Freelancer')
-    .update({ [field]: value })
-    .eq('id', userId);
-
-  if (error) {
-    console.error("Update failed:", error);
-  } else {
-    console.log(`${field} updated to ${value}`);
-  }
-}
+// Call on load
+fetchUserNames();
