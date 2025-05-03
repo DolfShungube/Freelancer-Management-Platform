@@ -1,5 +1,5 @@
 import supabase from "../config/superbaseClient.js";
-import supabase1 from "../config/test.js";
+import supabase1 from "../config/supabase1.js";
 
 
 
