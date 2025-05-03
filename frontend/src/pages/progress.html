@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClientPage</title>
+    <link rel="stylesheet" href="./Progress.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="../../../backend/Progress/progress.js" defer></script>
+
+
+</head>
+<body>
+    <header>
+        <h1>Progess overview </h1>
+
+    </header>
+
+    <main class="main-layout">
+
+      <section class="sideButtons">
+        <svg class="Hover" type="button" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
+          <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+          <path d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9 9 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.4 10.4 0 0 1-.524 2.318l-.003.011a11 11 0 0 1-.244.637c-.079.186.074.394.273.362a22 22 0 0 0 .693-.125m.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6-3.004 6-7 6a8 8 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a11 11 0 0 0 .398-2"/>
+        </svg>
+        
+        <svg class="Hover" type="button" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+          <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"/>
+          <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+        </svg>
+
+
+        <svg onclick="history.back()" class="Hover" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-backspace" viewBox="0 0 16 16">
+          <path d="M5.83 5.146a.5.5 0 0 0 0 .708L7.975 8l-2.147 2.146a.5.5 0 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 0 0 0 .707-.708L9.39 8l2.146-2.146a.5.5 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 0 0 0-.707 0z"/>
+          <path d="M13.683 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1zm-7.08 1a1 1 0 0 0-.76.35L1 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/>
+       </svg>
+
+      </section>
+
+
+        <section >
+
+          <ul class="created-jobs" >
+            <li id="job-description">
+              <h1 id="jobtitle">Name</h1>
+              <h2 >Description:</h2>
+              <p id="description-text">
+                
+              </p>
+
+              <button class="task-button" id="addTask" style="display: none;">
+                Add Task
+                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+               </svg>
+             </button> 
+             <button id="addtext" style="display: none;">Add</button>
+
+             <textarea inputmode="tel" id="myNewTask" style="width: 100%; display: none;" placeholder="Type here..." required></textarea>
+
+            </li>
+
+          </ul>
+
+              <h1>All Tasks</h1>
+          <ul class="created-jobs" id="myTask">
+
+
+          </ul>
+
+        </section>
+
+
+        <section  >
+
+
+          <ul class="created-jobs">
+            <h1>Task Tracking</h1>
+            <li>
+              <section class="taskinfo">
+              <img src="./images/task.png" alt="Task" width="64px" height="64px">
+              <h1>Total task</h1>
+              <p id="total-tasks">0</p>
+              </section>
+            </li>
+
+            <li>
+
+              <section class="taskinfo">
+              <img src="./images/completed.jpg" alt="Task" width="64px" height="64px">
+                                <h1>Completed Tasks</h1>
+              <p id="completed-tasks">0</p>
+              </section>
+
+
+            </li>
+          </ul>
+
+          <ul class="created-jobs">
+  
+            <li>
+              <h1>Completion</h1>
+              <canvas class="taskDonutChart" id="taskDonutChart" width="100" height="100"></canvas>  
+            </li>
+          </ul>
+
+
+        </section>
+
+  
+
+
+
+
+
+
+
+
+    </main>
+
+
+    
+    
+</body>
+
+</html>
