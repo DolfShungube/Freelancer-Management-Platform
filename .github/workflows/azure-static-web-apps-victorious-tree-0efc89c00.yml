@@ -11,6 +11,9 @@ jobs:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     name: Build and Deploy Job
+    environment:
+      name: production  
+      url: https://victorioustree-0efc89c00.azurestaticapps.net
     permissions:
        id-token: write
        contents: read
