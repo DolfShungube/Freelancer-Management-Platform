@@ -1,7 +1,8 @@
 import supabase from '../config/superbaseClient.js';
 
 const fetchinfo = async () => {
-  const Freelancer_info = document.querySelector('.profile-info');
+  const Freelancer_info = document.querySelector('.form-profile .profile-text');
+  const profileImage = document.getElementById('profile-img');
 
   // Get the currently logged-in user
   const { data: { user }, error: authError } = await supabase.auth.getUser();
@@ -32,7 +33,6 @@ const fetchinfo = async () => {
   FreelancerProfile.classList.add('profile-text');
 
   FreelancerProfile.innerHTML = `
-    <img src="${data.profilepicture || 'images/profile_picture.jpg'}" alt="Profile Picture" class="profile-pic" />
     <p class="greeting">Hi, ${data.firstname} ${data.lastname}</p>
     <p class="role">Freelancer</p>
   `;
