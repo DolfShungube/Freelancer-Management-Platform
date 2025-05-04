@@ -269,7 +269,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     // Update the greeting
     const greetingElem = document.querySelector(".greeting");
     greetingElem.innerHTML = `
-      <img class="profile-icon" src="images/profile_picture.png" alt="Profile icon" style="width: 100px; height: 100px;" />
+      
       Hi ${adminData.firstname} (Admin)
     `;
 

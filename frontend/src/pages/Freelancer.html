@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <title>Freelancio</title>
   <link rel="stylesheet" href="freelancer.css" />
-  
-  
 </head>
 <body>
 
@@ -13,61 +11,44 @@
     <h1>Freelancio.
         <img src="images/coffee.png" alt="Freelancio Icon" style="width: 27px; vertical-align: baseline; margin-right: 8px;">
     </h1>
-    <button id="search-icon"><img src="images/search.png" alt="Freelancio Icon" style="width: 23px; vertical-align: baseline; margin-right: 8px; margin-top: 7px;"></button>
+    <button id="search-icon">
+      <img src="images/search.png" alt="Search Icon" style="width: 23px; vertical-align: baseline; margin-right: 8px; margin-top: 7px;">
+    </button>
     <button id="menu-icon">☰</button>
-
-    </form>
+  </form>
 
   
-    <form class="form-progress">
-      <section class="job-info">
-        <p class="label">Current Job:</p>
-        <p class="job-title">Job Title </p>
-      </section>
-    
-      <p class="progress-label">Progress</p>
-      <progress value="0" max="100"></progress>
-    </form>
 
-</form>
-
-<form class="profile-info">
-  <img src="images/profile_picture.jpg" alt="Profile Picture" class="profile-pic" />
-  <section class="profile-text">
+  <form class="form-profile">
+    <a href="Setting.html">
+      <img id="profile-img" src="images/profile_picture.jpg" alt="Profile Picture" class="profile-pic" />
+    </a>
+    <section class="profile-text">
       <p class="greeting">Hi,</p>
       <p class="role">Freelancer</p>
     </section>
-</form>
-
-
-
-
+  </form>
 
   <section class="form-available-jobs">
     <h2>Available Jobs</h2>
-  
-    <!-- This section will be dynamically generated -->
     <ul class="job-list">
       <li>
         <form class="job-card">
           <h3>Job Title</h3>
-          
-          
-      
-          <!-- Hidden details using <p> only -->
-            <p class="description hidden">What is the job about and all that.......</p>
+          <p class="description hidden">What is the job about and all that.......</p>
           <p class="clientDetails hidden">The details of the client........</p>
           <p class="clientName hidden">clientName:.......</p>
           <p class="clientLastname hidden">clientLastNAme.........</p>
-      
           <button type="button" class="view-details-btn">View Details</button>
-          
         </form>
       </li>
     </ul>
   </section>
 
+  
+ 
   <script type="module" src="../../../backend/Freelancer/Jobs.js"></script>
   <script type="module" src="../../../backend/Freelancer/freelancer_details.js"></script>
+
 </body>
 </html>

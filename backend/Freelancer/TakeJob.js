@@ -1,43 +1,155 @@
 import supabase from '../../../backend/config/superbaseClient.js';
 
-  const params = new URLSearchParams(window.location.search);
-  const jobId = params.get('id');
+// ✅ SweetAlert2 showAlert function
+function showAlert(message, type = 'info') {
+    Swal.fire({
+        title: type === 'success' ? 'Success!' : 'Oops!',
+        text: message,
+        icon: type, // 'success', 'error', 'warning', 'info'
+        confirmButtonText: 'OK'
+    });
+}
 
-  // Fill in job details
-  document.getElementById('client-name').textContent = `${params.get('firstname') || 'First'} ${params.get('lastname') || 'Last'}`;
-  document.getElementById('description-text').textContent = params.get('description') || 'No description provided.';
+const params = new URLSearchParams(window.location.search);
+const jobId = params.get('id');
 
-  // Take job logic
-  document.querySelector('form.form-job-info').addEventListener('submit', async (e) => {
-    e.preventDefault(); // prevent form refresh
+// Fill in job details
+document.getElementById('client-name').textContent =
+  `${params.get('firstname') || 'First'} ${params.get('lastname') || 'Last'}`;
+document.getElementById('description-text').textContent =
+  params.get('description') || 'No description provided.';
 
-    if (!jobId) {
-      alert('No job ID found!');
+// Take job logic
+document.querySelector('form.form-job-info').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  if (!jobId) {
+    showAlert('No job ID found!', 'error');
+    return;
+  }
+
+  const { error } = await supabase
+    .from('Jobs')
+    .update({ assigned: true })
+    .eq('id', jobId);
+
+  if (error) {
+    showAlert('Failed to take job. Please try again.', 'error');
+    console.error(error);
+    return;
+  }
+
+  // Show upload popup
+  document.getElementById('uploadModal').style.display = 'block';
+});
+
+// Upload button logic
+document.getElementById('apply-btn').addEventListener('click', (e) => {
+  e.preventDefault();
+  document.getElementById('uploadModal').style.display = 'block';
+});
+
+// Close modal function
+function closeModal() {
+  document.getElementById('uploadModal').style.display = 'none';
+}
+
+document.getElementById('close-btn').addEventListener('click', closeModal);
+
+// DOMContentLoaded logic
+document.addEventListener('DOMContentLoaded', () => {
+  const fileInput = document.getElementById('fileInput');
+  const uploadForm = document.getElementById('uploadForm');
+  const fileList = document.getElementById('fileList');
+
+  uploadForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const file = fileInput.files[0];
+    if (!file) {
+      showAlert('Please select a file.', 'warning');
       return;
     }
 
-    const { error } = await supabase
-      .from('Jobs')
-      .update({ assigned: true })
-      .eq('id', jobId);
+    Swal.fire({
+      title: 'Uploading...',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
 
-    if (error) {
-      alert('Failed to take job. Please try again.');
-      console.error(error);
-    } else {
-      // Success feedback: cool animation or message
-      const button = document.getElementById('apply-btn');
-      button.textContent = '🎉 Job Taken!';
-      button.disabled = true;
-
-      // Optional: Add animation
-      button.style.backgroundColor = '#4CAF50';
-      button.style.color = 'white';
-      button.style.transition = '0.3s ease';
-
-      // You can also redirect or refresh the list after 2 seconds
-      setTimeout(() => {
-        window.location.href = 'Freelancer.html'; // Replace with your jobs list page
-      }, 2000);
+    if (file.type !== 'application/pdf') {
+      showAlert('Only PDF files are allowed.', 'warning');
+      return;
     }
+
+    if (!jobId) {
+      showAlert('Job ID not found in URL.', 'error');
+      return;
+    }
+
+    // Get Freelancer info from Supabase Auth
+    const { data: authData, error: authError } = await supabase.auth.getUser();
+    if (authError || !authData?.user) {
+      showAlert('User not authenticated.', 'error');
+      return;
+    }
+
+    const user = authData.user;
+
+    // Get freelancer ID by email
+    const { data: freelancer, error: freelancerError } = await supabase
+      .from('Freelancer')
+      .select('id')
+      .eq('id', user.id)
+      .single();
+
+    if (freelancerError || !freelancer) {
+      showAlert('Freelancer not found.', 'error');
+      return;
+    }
+
+    const freelancerID = freelancer.id;
+
+    // Upload CV to Supabase Storage
+    const filePath = `cv/cv_${Date.now()}_${file.name}`;
+    const { error: uploadError } = await supabase
+      .storage
+      .from('user-documents')
+      .upload(filePath, file);
+
+    if (uploadError) {
+      Swal.close();
+      showAlert('CV upload failed.', 'error');
+      return;
+    }
+
+    // Insert into Applications table
+    const { error: insertError } = await supabase
+      .from('Aplications') // still spelled as "Aplications"—make sure this is intentional!
+      .insert([{
+        jobID: jobId,
+        freelancerID: freelancerID,
+        status: null
+      }]);
+
+    if (insertError) {
+      console.error(insertError.message);
+      showAlert('Application failed.', 'error');
+      return;
+    }
+
+    showAlert('CV uploaded and application submitted!', 'success');
+    fileList.innerHTML = `<li>${file.name}</li>`;
+    fileInput.value = '';
+
+    // Close modal
+    closeModal();
+
+    // Redirect after 2 seconds
+    setTimeout(() => {
+      window.location.href = 'Freelancer.html';
+    }, 2000);
   });
+});

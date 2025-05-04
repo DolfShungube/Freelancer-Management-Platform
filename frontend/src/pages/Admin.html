@@ -19,10 +19,21 @@
     </h2>
   </nav>
 
-  <p class="greeting"  style="font-size: 16px; color: #333;margin-top: 50px;margin-right: 50px; font-style:oblique;font-weight: bold; ">
-    <img class="profile-icon" src="images/profile_picture.png" alt="Profile icon" style="width: 100px; height: 100px;" />
-    
-  </p>
+  <!--<p class="greeting" style="font-size: 16px; color: #333; margin-top: 50px; margin-right: 50px; font-style: oblique; font-weight: bold;">
+    <a href="Setting.html">
+      <img class="profile-icon" src="images/profile_picture.png" alt="Profile icon" style="cursor: pointer; width: 100px; height: 100px;" />
+    </a>
+  </p>-->
+  <form class="form-profile">
+    <a href="Setting_admin.html">
+      <img src="images/profile_picture.png" alt="Profile Picture" class="profile-pic" style="cursor: pointer;"/>
+    </a>
+    <section class="profile-text">
+        <p class="greeting">Hi,</p>
+        <p class="role">Freelancer</p>
+      </section>
+  </form>
+  
 
   <section id ="users" class="section-box">
     <h3 class="section-title">👥 Users</h3>
@@ -49,7 +60,8 @@
 
     <button id="buttonAdd" class="add-btn" onclick="toggleForm()">Add Admin</button>
   </section>
-  <script type="module" src="../../../backend/Admin/users_admin.js"></script>
+  <script type="module" src="../../../backend/Admin/users_admin.js"></script>  
+
 
 </body>
 </html>
