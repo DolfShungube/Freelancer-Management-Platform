@@ -7,14 +7,27 @@
 </head>
 <body>
 
-  <form action="" class="form-header">
-    <h1>Freelancio.
-        <img src="images/coffee.png" alt="Freelancio Icon" style="width: 27px; vertical-align: baseline; margin-right: 8px;">
+  <form action="" class="form-header" style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1rem;">
+    <h1 style="flex-grow: 1; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 1rem;margin-left: 200px;">
+      Freelancio.
+      <img src="images/coffee.png" alt="Freelancio Icon" style="width: 27px; margin-left: 8px;">
     </h1>
-    <button id="search-icon">
-      <img src="images/search.png" alt="Search Icon" style="width: 23px; vertical-align: baseline; margin-right: 8px; margin-top: 7px;">
+  
+    <button type="button" class="chat-btn"
+      onclick="window.location.href='clients.html'" aria-label="Open Chat"
+      style="background-color: #fff; border: none; border-radius: 50%; padding: 0.5rem; cursor: pointer; margin-left: auto; margin-right: 1rem;">
+      <img src="../../src/pages/images/bubble-chat.png" alt="Chat" style="width: 30px; height: 30px;">
     </button>
-    <button id="menu-icon">☰</button>
+  
+    <button id="search-icon" 
+      style="background: none; border: none; cursor: pointer; margin-right: 1rem;">
+      <img src="images/search.png" alt="Search Icon" style="width: 23px;">
+    </button>
+  
+    <button id="menu-icon" 
+      style="background: none; border: none; font-size: 24px; cursor: pointer;">
+      ☰
+    </button>
   </form>
 
   
