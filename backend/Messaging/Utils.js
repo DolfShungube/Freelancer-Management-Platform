@@ -1,11 +1,15 @@
 import supabase from '../config/superbaseClient.js'
 //change the below lines to getdocumentbyid if required :)
-const messageList= document.querySelector('message')
-const writeNewMessage=document.querySelector('newmessage')
+const messageList = document.getElementById('chatbox');
+//const writeNewMessage = document.getElementById('messageInput');
+
 //add show alert later
+
 //add superbase realtime
 //styles for messages page to allow auto scroll
 //sentBY== false means sent by client
+
+const {data:{user},error:authError} = await supabase.auth.getUser();
 
 class Messages {
 
@@ -32,7 +36,8 @@ class Messages {
              const {data:messages,error}= await supabase
             .from('Messages')
             .select('*')
-            .match({ clientID: this.clientID, freelancerID: this.freelancerID,projectID:this.projectID });  
+            .match({ clientID: this.clientID, freelancerID: this.freelancerID,projectID:this.projectID })
+            .order('created_at', { ascending: true }); 
 
             if(error){
                 this.showAlert(error.message,'error');
@@ -55,15 +60,34 @@ class Messages {
     async newMassege(message){
 
         //adding each fetched message to the page with massages
+        //FALSE = sentBy Client
+        //TRUE = sentBy Freelancer
 
-        const list= document.createElement('li');
+        const article = document.createElement('article');
+        if(user.id === message.clientID){
+            console.log(message.sentBy)
+            if(message.sentBy === false){
+                article.classList.add('sent');
+            }else{
+                article.classList.add('received');  
+            }
+        
+        }
 
-        list.innerHTML=`
-        <p>${message.message}</p>
-        <p>${message.created_at}</p>
-               `
-        messageList.append(list)
-        messageList.scrollIntoView({behavior: 'smooth'},300)
+        if(user.id === message.freelancerID){
+            if(message.sentBy === true){
+                article.classList.add('sent');
+            }else{
+                article.classList.add('received');  
+            }
+        
+        }
+        article.innerHTML = `
+        ${message.message}
+        <time>${new Date(message.created_at).toLocaleTimeString()}</time>
+        `;
+        messageList.appendChild(article);
+        messageList.scrollTop = messageList.scrollHeight; // Auto scroll to bottom
 
     }
 
@@ -79,16 +103,22 @@ class Messages {
         // adding a new message to the database
         //sentBy takes true or false, if false messege was sent by a client
         
-
+        
         try {
             const{data,error}= await supabase
                 .from('Messages')
                 .insert([
-                        {message:message,clientID:clientID,projectID:projectID,sentBY:sentBY }
+                        {   message:message,
+                            clientID:clientID,
+                            freelancerID:freelancerID,
+                            projectID:projectID,
+                            sentBy:sentBY
+                        }
                         ])
             
             if(error){
                 this.showAlert(error.message,'error');
+                console.log("Failed to insert data",error)
                 return
             }
             return data
@@ -113,7 +143,7 @@ class Messages {
 
             .channel('new message')
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'Messages' }, (payload) => {
-              this.addMessagesToPage(payload.new);
+              this.addMessagesToPage([payload.new]);
             })
             .subscribe();
 
@@ -133,3 +163,5 @@ class Messages {
 
 
 }
+
+export { Messages };

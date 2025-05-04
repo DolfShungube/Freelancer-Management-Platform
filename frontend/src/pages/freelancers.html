@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Select a Client - Freelancio Chat</title>
+  <script type="module">
+    import supabase from "../../../backend/config/superbaseClient.js";
+  
+    async function loadClients() {
+      //  Get all clientIDs from Jobs table
+      const { data: jobData, error: jobError } = await supabase
+        .from('Jobs')
+        .select('freelancerID');
+  
+      if (jobError) {
+        console.error('Error loading jobs:', jobError.message);
+        return;
+      }
+  
+      //  Get unique client IDs
+      const uniqueFreelancerIDs = [...new Set(jobData.map(job => job.freelancerID))];
+  
+      //  Fetch all clients who match those IDs
+      const { data: freelancers, error: freelancerError } = await supabase
+        .from('Freelancer')
+        .select('id, firstname')
+        .in('id', uniqueFreelancerIDs);  // Filter only those with jobs
+  
+      if (freelancerError) {
+        console.error('Error loading clients:', freelancerError.message);
+        return;
+      }
+  
+      // Render client list
+      const freelancerList = document.getElementById('client-list');
+      freelancerList.innerHTML = '';  // Clear any existing content
+  
+      freelancers.forEach(freelancer => {
+        // Create chat-like entry for each client
+        const listItem = document.createElement('li');
+        listItem.classList.add('chat-entry');
+        
+        // Avatar with the first letter of the client's name
+        const avatar = document.createElement('p');
+        avatar.classList.add('avatar');
+        avatar.textContent = freelancer.firstname.charAt(0);  // Display first letter as avatar
+        
+        const clientName = document.createElement('p');
+        clientName.classList.add('client-name');
+        clientName.textContent = freelancer.firstname;
+        
+        listItem.onclick = () => {
+          // Highlight the selected client
+          const selected = document.querySelector('.selected');
+          if (selected) selected.classList.remove('selected');
+          listItem.classList.add('selected');
+          
+          // Redirect to the chatbox with the client's ID
+          window.location.href = `chatbox.html?freelancerID=${freelancer.id}`;
+        };
+        
+        listItem.appendChild(avatar);
+        listItem.appendChild(clientName);
+        freelancerList.appendChild(listItem);  // Add to the list
+      });
+    }
+  
+    loadClients();
+  </script>
+  
+  <style>
+    
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f3f3f3;
+    }
+
+    /* Chat-style header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #5c6bc0; 
+      color: white;
+      padding: 15px 25px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 100;
+    }
+
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+
+    /* Chat client list section */
+    section.client-section {
+      margin-top:160px;  
+      text-align: center;
+      padding: 2rem;
+      
+    }
+
+    section.client-section h2 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      color: #333;
+    }
+
+    #client-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    #client-list li {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    #client-list li:hover {
+      background-color: #f0f0f0;
+      transform: scale(1.02);
+    }
+
+    #client-list li:active {
+      background-color: #e0e0e0;
+    }
+
+    #client-list li.selected {
+      background-color: #5c6bc0;
+      color: white;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #5c6bc0;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      margin-right: 15px;
+    }
+
+    .client-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <!-- Chat-style header -->
+  <header>
+    <p class="logo">Freelancio Chat</p>
+    
+  </header>
+
+  <!-- Client list section -->
+  <section class="client-section">
+    <ul id="client-list">
+      <!-- Client names will be injected here -->
+    </ul>
+  </section>
+
+</body>
+</html>
