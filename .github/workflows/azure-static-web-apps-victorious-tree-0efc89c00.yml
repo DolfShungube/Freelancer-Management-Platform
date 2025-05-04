@@ -13,7 +13,7 @@ jobs:
     name: Build and Deploy Job
     environment:
       name: production  
-      url: https://victorioustree-0efc89c00.azurestaticapps.net
+      url: https://victorious-tree-0efc89c00.6.azurestaticapps.net
     permissions:
        id-token: write
        contents: read
