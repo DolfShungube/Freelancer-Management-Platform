@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         // Upload file to Supabase Storage
-        const filePath = `contracts/${user}-contract`;
+        const filePath = `contracts/${user.id}-contract`;
         const { error: uploadError } = await supabase
             .storage
             .from('user-documents')
