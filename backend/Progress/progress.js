@@ -4,6 +4,7 @@ const jobDescription=localStorage.getItem('jobDescription')
 const assignedFreelancerID=localStorage.getItem('assignedFreelancer')
 const clientID=localStorage.getItem('client')
 const userType= localStorage.getItem('userType')
+console.log(clientID)
 // const jobstring= localStorage.getItem('job')
 // const job=JSON.parse(jobstring)
 const addTask= document.getElementById('addTask');
@@ -15,6 +16,7 @@ if(userType==='Client'){
     addTask.style.display = 'none';  
 }
 
+
 import supabase from "../config/superbaseClient.js"
 import { Progress } from "./Utils.js"
 
@@ -25,9 +27,9 @@ const progress= new Progress(clientID,assignedFreelancerID,jobID)
 
 const job= await progress.getJob()
 let pretasks=  await progress.getTask(job);
-console.log(pretasks)
+
 const tasks= progress.normalizeTasks(pretasks)
-console.log(tasks)
+
 
 
 const totalTasks= progress.getTotalTask(tasks);
@@ -101,7 +103,35 @@ addTask.addEventListener('click',(e)=>{
 
 })
 
-/////////////add messaging code
+  const conView= document.getElementById('conView')
+  const conViewDropdown= document.getElementById('conViewDropdown')
+
+  conView.addEventListener('click',async(e)=>{
+     progress.dropDownstatusContract(conView,conViewDropdown,userType)
+  })
+
+  const call= document.getElementById('call')
+    console.log('goin free',userType,clientID)
+  call.addEventListener('click',(e)=>{
+  if(userType==='Client'){
+
+    window.location.href = `chatbox.html?clientID=${clientID}`;
+
+  }else{
+    console.log(' a free')
+
+
+    window.location.href = `chatbox.html?freelancerID=${assignedFreelancerID}`;
+
+  }
+
+  })
+
+
+
+
+
+
 
 
 

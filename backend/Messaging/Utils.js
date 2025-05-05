@@ -104,6 +104,7 @@ class Messages {
     async createMassage(clientID,freelancerID,projectID,message,sentBY){
         // adding a new message to the database
         //sentBy takes true or false, if false messege was sent by a client
+        console.log(clientID,freelancerID,projectID,message,sentBY)
         
         
         try {
