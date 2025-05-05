@@ -248,6 +248,7 @@ export async function  viewJobs(jobs) {
             localStorage.setItem('assignedFreelancer',job.freelancerID)
             localStorage.setItem('client',job.clientID)
             localStorage.setItem('job',JSON.stringify(job))
+            
             localStorage.setItem('userType','Client')
             
 
