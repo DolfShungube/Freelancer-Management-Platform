@@ -1,6 +1,7 @@
 import {Messages} from './Utils.js'
 import supabase from '../config/superbaseClient.js';
 
+
 // DOM elements
 const chatbox = document.getElementById('chatbox');
 const messageInput = document.getElementById('messageInput');
@@ -22,11 +23,14 @@ console.log("currenlty logged in user", user.id)
 
 let chat;
 if(freelancerID){
+  console.log('freelacer dolf')
 
     const { data: userData, error: fetchError1 } = await supabase
         .from("Jobs")
         .select("id")
-        .eq("freelancerID", freelancerID);
+        .match({freelancerID:freelancerID,clientID:user.id});
+
+        console.log(userData,'...........')
 
     if (fetchError1) {
         console.error('Error fetching job data:', fetchError1.message);
@@ -103,7 +107,7 @@ messageInput.addEventListener('keydown', (event) => {
     const { data: userData, error: fetchError1 } = await supabase
     .from("Jobs")
     .select("id")
-    .eq("freelancerID", user.id);
+    .match({freelancerID:user.id,clientID:clientID});
 
     if (fetchError1) {
         console.error('Error fetching job data:', fetchError1.message);

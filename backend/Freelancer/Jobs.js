@@ -56,8 +56,14 @@ const fetchJobs = async () => {
     viewBtn.addEventListener('click', () => {
       if (job.assigned) {
         // If job is assigned to anyone, open progress
+        localStorage.setItem('jobID', job.id);
+        localStorage.setItem('jobName',job.jobName)
+        localStorage.setItem('jobDescription',job.description)
+        localStorage.setItem('assignedFreelancer',job.freelancerID)
+        localStorage.setItem('client',job.clientID)
+        localStorage.setItem('job',JSON.stringify(job))
         localStorage.setItem('userType','freelancer')
-        window.location.href = 'progress.html';
+        window.location.href = './progress.html';
       } else {
         //  If job is unassigned, open ViewJob.html with details
         const params = new URLSearchParams({

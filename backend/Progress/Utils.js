@@ -409,6 +409,120 @@ async newStatus(status,id){
         }
     }
 
+    async  showContract(filename) {
+        console.log('contracts/'+filename)
+
+        try {
+            const { data, error } = await supabase
+            .storage
+            .from('user-documents')
+            .download('contracts/'+filename);
+            console.log(data)
+
+            if(error){
+                this.showAlert(error.message,'error'); 
+                return              
+            }else{
+                if(data){ 
+                    console.log(data)                 
+                    const url = URL.createObjectURL(data);
+                    console.log(url)
+                    window.open(url);
+                    return
+                }else{ 
+                    console.log('contract has not been uploaded')
+                    this.showAlert('contract not available','error')
+                    return
+                }
+
+
+            }
+            
+        } catch (error) {
+            console.log(error.message)
+            this.showAlert(error.message,'error');
+            return
+            
+        }
+        
+    }
+
+
+
+    dropDownstatusContract(element,theDropDown,userType) {
+
+
+        document.addEventListener('click', (e) => {
+            const ClickDropdown = element.contains(e.target); 
+            const clickedItem1= item1.contains(e.target)  
+            const clickedItem2=item2.contains(e.target)   
+            if (!ClickDropdown && !clickedItem1 && !clickedItem2) {
+                console.log('doc clock')
+                theDropDown.style.display='none'
+                theDropDown.innerText=''
+                element.style.display='block'
+
+                return ''
+
+            }
+
+          })
+
+    
+
+
+        element.style.display='none' 
+        theDropDown.style.display='block'
+
+  
+        const details=document.createElement('section')
+        details.className='dropdown'
+    
+    
+        const list=document.createElement("ul")
+    
+        const item1=document.createElement("li")
+                item1.id="view"
+                item1.textContent="View contract"
+        const item2=document.createElement("li")
+                item2.id="upload"
+                item2.textContent="Upload contract"
+    
+
+        list.append(item1,item2)
+        details.appendChild(list)
+        theDropDown.appendChild(details);
+
+    
+    
+        item1.addEventListener('click',async(e)=>{
+
+             this.showContract(this.clientID+'-'+this.jobID+'-contract.pdf')
+            element.style.display='block'
+            theDropDown.style.display='none'
+
+
+            
+            
+        })
+
+        if(userType==='Client'){
+    
+        item2.addEventListener('click',async(e)=>{
+
+                window.location.href = './UploadContract.html';
+                element.style.display='block'
+                theDropDown.style.display='none'  
+                         
+
+
+              
+            })
+        }
+
+
+    }
+
   
 
 }

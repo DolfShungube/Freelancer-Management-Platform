@@ -1,7 +1,7 @@
 import supabase from '../../../backend/config/superbaseClient.js';
 
 
-// ✅ SweetAlert2 showAlert function
+
 function showAlert(message, type = 'info') {
     Swal.fire({
         title: type === 'success' ? 'Success!' : 'Oops!',
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Upload file to Supabase Storage
         //file name clientid-jobid-contract
-        const filePath = `contracts/${user.id}-${jobid}-contract`;
+        const filePath = `contracts/${user.id}-${jobid}-contract.pdf`;
         const { error: uploadError } = await supabase
             .storage
             .from('user-documents')
