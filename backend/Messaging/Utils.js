@@ -1,6 +1,6 @@
 import supabase from '../config/superbaseClient.js'
 //change the below lines to getdocumentbyid if required :)
-const messageList = document.getElementById('chatbox');
+
 //const writeNewMessage = document.getElementById('messageInput');
 
 //add show alert later
@@ -9,7 +9,7 @@ const messageList = document.getElementById('chatbox');
 //styles for messages page to allow auto scroll
 //sentBY== false means sent by client
 
-const {data:{user},error:authError} = await supabase.auth.getUser();
+
 
 class Messages {
 
@@ -58,6 +58,8 @@ class Messages {
     }
 
     async newMassege(message){
+        const messageList = document.getElementById('chatbox');
+        const {data:{user},error:authError} = await supabase.auth.getUser();
 
         //adding each fetched message to the page with massages
         //FALSE = sentBy Client
