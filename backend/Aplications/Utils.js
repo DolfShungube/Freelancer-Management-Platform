@@ -1,6 +1,6 @@
 import supabase from '../config/superbaseClient.js'
 //change the below lines to getdocumentbyid if required :)
-const aplicationList= document.querySelector('Aplications')
+//const aplicationList= document.querySelector('Aplications')
 //add show alert later
 //add superbase realtime
 //styles for messages page to allow auto scroll
@@ -23,12 +23,16 @@ export class Aplications {
         });
     }
 
+    async fetchFreelancer() {
+        return await supabase
+          .from('Freelancer')
+          .select('*')
+          .eq('id', this.freelancerID);
+      }
+
     async getFreelancer(){
         try {
-            const { data: aplications, error } = await supabase
-            .from('Freelancer')
-            .select('*')
-            .eq('id', this.freelancerID)
+            const { data: aplications, error } = await this.fetchFreelancer()
 
             if(error){
                 this.showAlert(error.message,'error');
@@ -71,7 +75,7 @@ export class Aplications {
                 this.showAlert(error.message,'error');
                 return
             }
-
+            this.showAlert('success','success');
             return aplications
 
 
