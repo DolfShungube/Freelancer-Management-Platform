@@ -115,13 +115,13 @@ addTask.addEventListener('click',(e)=>{
   call.addEventListener('click',(e)=>{
   if(userType==='Client'){
 
-    window.location.href = `chatbox.html?clientID=${clientID}`;
-
-  }else{
-    console.log(' a free')
-
 
     window.location.href = `chatbox.html?freelancerID=${assignedFreelancerID}`;
+  }else{
+    console.log(' a free')
+    window.location.href = `chatbox.html?clientID=${clientID}`;
+
+
 
   }
 
