@@ -15,6 +15,7 @@ const fetchJobs = async () => {
   const { data, error } = await supabase
     .from('Jobs')
     .select(`
+    clientID,
       id,
       jobName,
       description,
