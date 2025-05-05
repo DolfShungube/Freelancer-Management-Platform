@@ -1,6 +1,6 @@
 import supabase from '../../../backend/config/superbaseClient.js';
 
-// ✅ SweetAlert2 showAlert function
+//SweetAlert2 showAlert function
 function showAlert(message, type = 'info') {
     Swal.fire({
         title: type === 'success' ? 'Success!' : 'Oops!',
@@ -47,6 +47,7 @@ document.querySelector('form.form-job-info').addEventListener('submit', async (e
 document.getElementById('apply-btn').addEventListener('click', (e) => {
   e.preventDefault();
   document.getElementById('uploadModal').style.display = 'block';
+  document.getElementById('apply-btn').style.display ='none';
 });
 
 // Close modal function
@@ -54,7 +55,11 @@ function closeModal() {
   document.getElementById('uploadModal').style.display = 'none';
 }
 
-document.getElementById('close-btn').addEventListener('click', closeModal);
+document.getElementById('close-btn')?.addEventListener('click', () => {
+  closeModal();
+  document.getElementById('apply-btn').style.display = 'inline';
+});
+
 
 // DOMContentLoaded logic
 document.addEventListener('DOMContentLoaded', () => {
@@ -86,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!jobId) {
       showAlert('Job ID not found in URL.', 'error');
+      document.getElementById('apply-btn').style.display ='inline';
       return;
     }
 
@@ -93,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const { data: authData, error: authError } = await supabase.auth.getUser();
     if (authError || !authData?.user) {
       showAlert('User not authenticated.', 'error');
+      document.getElementById('apply-btn').style.display ='inline';
       return;
     }
 
@@ -107,13 +114,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (freelancerError || !freelancer) {
       showAlert('Freelancer not found.', 'error');
+      document.getElementById('apply-btn').style.display ='inline';
       return;
     }
 
     const freelancerID = freelancer.id;
 
     // Upload CV to Supabase Storage
-    const filePath = `cv/cv_${Date.now()}_${file.name}`;
+    const filePath = `cv/${freelancerID}-cv`;
     const { error: uploadError } = await supabase
       .storage
       .from('user-documents')
@@ -121,7 +129,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (uploadError) {
       Swal.close();
+     // console.error('Upload error:', uploadError.message);
       showAlert('CV upload failed.', 'error');
+      document.getElementById('apply-btn').style.display ='inline';
       return;
     }
 
@@ -137,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (insertError) {
       console.error(insertError.message);
       showAlert('Application failed.', 'error');
+      document.getElementById('apply-btn').style.display ='inline';
       return;
     }
 
