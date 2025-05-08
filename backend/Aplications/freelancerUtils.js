@@ -6,6 +6,8 @@ const aplicationList= document.querySelector('Aplications')
 //styles for messages page to allow auto scroll
 //sentBY== false means sent by client
 
+//llllllllllllllllllllllllllllllllllll
+
 export class FreelancerAplications {
 
     constructor(freelancerID,projectID) {
