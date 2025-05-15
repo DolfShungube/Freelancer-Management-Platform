@@ -108,6 +108,11 @@
     background-position: center center;
     background-attachment: fixed;            /*optional: makes text readable on black */
   }
+
+  .page-break {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
   
 
   

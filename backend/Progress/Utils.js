@@ -254,11 +254,11 @@ async newStatus(status,id){
                 this.showAlert(error+'dolf','error')
                 console.log(console.log(error))
             }else{
-                //this.showAlert("new task added",'success')
+                this.showAlert("new task added",'success')
             }
         
     } catch (error) {
-       // this.showAlert(error.message,'error')
+        this.showAlert(error.message,'error')
         
     }
 
@@ -487,9 +487,14 @@ async newStatus(status,id){
         const item2=document.createElement("li")
                 item2.id="upload"
                 item2.textContent="Upload contract"
+
+        
+        const item3=document.createElement('li')
+                item3.id='Report'
+                item3.textContent='View Report'
     
 
-        list.append(item1,item2)
+        list.append(item1,item2,item3)
         details.appendChild(list)
         theDropDown.appendChild(details);
 
@@ -519,6 +524,13 @@ async newStatus(status,id){
               
             })
         }
+
+        item3.addEventListener('click',(e)=>{
+
+            localStorage.setItem('jobID', this.jobID);
+            window.location.href = './progressReport.html';
+
+        })
 
 
     }
