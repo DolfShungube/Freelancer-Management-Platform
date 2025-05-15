@@ -1,7 +1,7 @@
 {
     "scripts": {
         "build": "echo 'No build step required'",
-        "test": "vitest"
+        "test": "vitest",
         "coverage": "vitest run --coverage"
     },
     "devDependencies": {
