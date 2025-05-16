@@ -1,4 +1,4 @@
-import supabase from '../../../backend/config/superbaseClient.js';
+import supabase from '../config/superbaseClient.js';
 
 
 
