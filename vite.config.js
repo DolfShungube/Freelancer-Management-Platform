@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
-import { application } from 'express'
+// import { application } from 'express'
 
 export default defineConfig({
   root: './',          
