@@ -1,7 +1,8 @@
 {
     "scripts": {
-        "build": "echo 'No build step required'",
+        "build": "vite build",
         "test": "vitest",
+        "dev": "vite",
         "coverage": "vitest run --coverage"
     },
     "devDependencies": {
@@ -26,7 +27,9 @@
     },
     "homepage": "https://github.com/DolfShungube/Freelancer-Management-Platform#readme",
     "dependencies": {
+        "@supabase/supabase-js": "^2.49.4",
         "@testing-library/react": "^16.3.0",
-        "jsdom": "^26.1.0"
+        "jsdom": "^26.1.0",
+        "vite": "^6.3.5"
     }
 }
