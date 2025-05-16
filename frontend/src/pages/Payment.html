@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Freelancio – Milestone Payments</title>
+  <link rel="stylesheet" href="freelancer.css" />
+  <style>
+    .job-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .job-card button {
+      padding: 6px 12px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─────── Header ─────── -->
+  <form class="form-header">
+    <h1>Freelancio.
+      <img src="images/coffee.png" alt="Freelancio Icon"
+           style="width:27px;vertical-align:baseline;margin-right:8px">
+    </h1>
+    <button id="search-icon">
+      <img src="images/search.png" alt="Search icon"
+           style="width:23px;vertical-align:baseline;margin-right:8px;margin-top:7px">
+    </button>
+    <button id="menu-icon">☰</button>
+  </form>
+
+  <!-- ─────── Progress Bar ─────── -->
+  <form class="form-progress">
+    <section class="job-info">
+      <p class="label">Project:</p>
+      <p class="job-title">UI / UX Design</p>
+    </section>
+    <p class="progress-label">Overall Progress</p>
+    <progress id="overall-progress" value="0" max="100"></progress>
+  </form>
+
+  <!-- ─────── Profile Info ─────── -->
+  <form class="profile-info">
+    <img src="images/profile_picture.jpg" alt="Profile Picture" class="profile-pic">
+    <section class="profile-text">
+      <p class="greeting">Hi,</p>
+      <p class="role">Client</p>
+    </section>
+  </form>
+
+  <!-- ─────── Milestone Payments ─────── -->
+  <section class="form-available-jobs">
+    <h2>Milestone Payments (25% each)</h2>
+
+    <ul class="job-list" style="list-style: none; padding-left: 0;">
+      <!-- Milestone 1 -->
+      <li>
+        <form class="job-card">
+          <p style="margin: 0;">
+            <strong>Milestone 1 – 25%</strong><br>
+            Pay on delivery of initial wireframes.
+          </p>
+          <button type="button">Pay Now</button>
+        </form>
+      </li>
+
+      <!-- Milestone 2 -->
+      <li>
+        <form class="job-card">
+          <p style="margin: 0;">
+            <strong>Milestone 2 – 50%</strong><br>
+            Pay on delivery of high-fidelity mockups.
+          </p>
+          <button type="button">Pay Now</button>
+        </form>
+      </li>
+
+      <!-- Milestone 3 -->
+      <li>
+        <form class="job-card">
+          <p style="margin: 0;">
+            <strong>Milestone 3 – 75%</strong><br>
+            Pay when interactive prototype is approved.
+          </p>
+          <button type="button">Pay Now</button>
+        </form>
+      </li>
+
+      <!-- Milestone 4 -->
+      <li>
+        <form class="job-card">
+          <p style="margin: 0;">
+            <strong>Milestone 4 – 100%</strong><br>
+            Final payment on handoff of design assets.
+          </p>
+          <button type="button">Pay Now</button>
+        </form>
+      </li>
+    </ul>
+  </section>
+
+</body>
+</html>
