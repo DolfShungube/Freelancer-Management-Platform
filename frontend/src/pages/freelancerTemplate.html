@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Freelancer Jobs</title>
+  <link rel="stylesheet" href="freelancerTemplate.css">
+</head>
+<body>
+
+  <h1>Freelancer: My Jobs</h1>
+
+  <fieldset>
+    <legend>Jobs Applied For</legend>
+    <table>
+      <thead>
+        <tr><th>Job Name</th><th>Status</th></tr>
+      </thead>
+      <tbody id="applied-jobs-body">
+      </tbody>
+    </table>
+  </fieldset>
+
+  <fieldset>
+    <legend>Jobs in Progress</legend>
+    <table>
+      <thead>
+        <tr><th>Job Name</th><th>Client</th><th>Status</th></tr>
+      </thead>
+      <tbody id="freelancer-progress-body">
+      </tbody>
+    </table>
+  </fieldset>
+
+  <script>
+    async function loadFreelancerJobs() {
+      try {
+        const res = await fetch('/api/freelancer-jobs');
+        const data = await res.json();
+
+        const appliedBody = document.getElementById("applied-jobs-body");
+        appliedBody.innerHTML = "";
+        data.applied_jobs.forEach(job => {
+          appliedBody.innerHTML += `<tr><td>${job.name}</td><td>${job.status}</td></tr>`;
+        });
+
+        const progressBody = document.getElementById("freelancer-progress-body");
+        progressBody.innerHTML = "";
+        data.in_progress_jobs.forEach(job => {
+          progressBody.innerHTML += `<tr><td>${job.name}</td><td>${job.client}</td><td>${job.status}</td></tr>`;
+        });
+
+      } catch (error) {
+        console.error("Failed to load freelancer jobs:", error);
+      }
+    }
+
+    window.onload = loadFreelancerJobs;
+  </script>
+
+</body>
+</html>
