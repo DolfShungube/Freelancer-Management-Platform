@@ -239,7 +239,7 @@ export async function  viewJobs(jobs) {
     `
     showdetails.addEventListener('click', () => {
         console.log(job,"from load")
-        if(job.assigned!=false){
+        if(job.assigned===true){
 
             // go to page to view progres
             localStorage.setItem('jobID', job.id);
