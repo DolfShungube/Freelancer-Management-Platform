@@ -1,5 +1,7 @@
 import superbase from '../config/superbaseClient.js'
 
+import {progressReport}  from '../progressReport/Utils.js'
+
 export async function addNewJob(clientID,projectName,projectDescription,amount){
 
     let issue=''
@@ -36,6 +38,9 @@ export async function addNewJob(clientID,projectName,projectDescription,amount){
 
 
 }
+
+
+
 
 
 export async function addNewPayment(jobID,amount) {
@@ -94,6 +99,51 @@ export async function userProfile(userID,userType){
     }
     
 }
+
+export async function aplicantCount(jobID){
+   const issue=''
+    try{
+            
+        const {data,error}= await superbase
+            .from("Aplications")
+            .select('*')
+            .eq('jobID',jobID)
+
+            if(error){
+                issue=error.message
+                return issue
+            }else{
+                return data.length
+            }
+
+
+        
+    } catch (error) {
+        issue=error.message
+        
+    }
+    
+}
+
+export function progressCalculator(totalTasks,completedTasks){
+
+    if(totalTasks===0){
+        return 0
+    }
+    
+    
+    return (completedTasks/totalTasks)*100
+
+}
+
+
+
+
+
+
+
+
+
 
 
 export async function clientJobs(userID) {
@@ -177,6 +227,11 @@ export async function getPayment(userID) {
 
 
 export async function  viewJobs(jobs) {
+
+    let openJobs=0;
+    let JobsInaplication=0;
+    let jobsInprogress=0;
+
     const jobList= document.getElementById('joblist')
     const activeJobList=document.getElementById('active-jobs')
     jobList.innerHTML = '';
@@ -185,29 +240,18 @@ export async function  viewJobs(jobs) {
         return;
       }
 
-    jobs.forEach(async job => {
+     await jobs.forEach(async (job,index) => {
         const freelancer= await getFreelancer(job.freelancerID)
-        const cost= await getPayment(job.id)
-
-        let AssignedFreelancer='None'
-        let amount='Missing'
-
-        if(freelancer.length!=0){
-            AssignedFreelancer= freelancer[0].firstname+" "+freelancer[0].lastname
-        }
-
-        if(cost.length!=0){
-            amount=cost[0].amount
-
-        }
 
 
         const list = document.createElement('li');
         const form = document.createElement('form');
         form.className = 'job-card';
 
-        const jobname = document.createElement('h3');
-        jobname.textContent = job.jobName;
+        const jobname = document.createElement('h4');
+        const sometext=job.jobName
+        jobname.textContent = sometext.length > 15 ? sometext.slice(0, 15) + "..." : sometext;
+        
 
         const showdetails = document.createElement('button');
         showdetails.type = 'button';
@@ -215,29 +259,6 @@ export async function  viewJobs(jobs) {
 
         const details=document.createElement('section');
         details.style.display='none';
-    details.innerHTML = `
-        <section>
-         <h3>Description:</h3>
-        <p>${job.description}</p>
-      </section>
-       
-      <section>
-            <h3>Progress:</h3>
-            <progress value="${job.progress || 0}" max="100"></progress>
-      
-      </section>
-
-      <section>
-         <h3>Cost:${amount}</h3>
-      </section>
-
-      <section>
-      <h3>Assigned freelancer:</h3>
-      <p>${AssignedFreelancer} </p>
-
-      </section>
-
-    `
     showdetails.addEventListener('click', () => {
         console.log(job,"from load")
         if(job.assigned===true){
@@ -274,17 +295,103 @@ export async function  viewJobs(jobs) {
 
       form.append(jobname, showdetails, details);
       list.appendChild(form);
-           if(job.assigned!=true){
+      if(job.assigned!=true){
+
+             let aplicants = document.createElement('section')
+             const total= await aplicantCount(job.id)
+             if(total===0){
+                openJobs+=1
+
+             }else{
+                JobsInaplication+=1
+
+             }
+             aplicants.innerHTML=`
+                     <section>
+                    <h6>Aplicants:${total}</h6>
+                    </section>
+             
+             `
+             form.appendChild(aplicants)
               jobList.appendChild(list)
       }else{
-        activeJobList.appendChild(list)
+            jobsInprogress+=1
+
+            const progress= new progressReport()
+            const alltasks= await progress.getTasks(job.id)
+            const completedTasks= await progress.getCompletedTasks(alltasks)
+
+            const countTotal= alltasks.length
+            const countcomplete= completedTasks.length
+             let aplicants = document.createElement('section')
+             const total= await aplicantCount(job.id)
+             aplicants.innerHTML=`
+                     <section>
+                    <h6>Progress:${progressCalculator(countTotal,countcomplete)}%</h6>
+                    </section>
+             
+             `
+             form.appendChild(aplicants)
+            activeJobList.appendChild(list)
       }
-        
+
+      if(index=== jobs.length-1){
+                mystats(openJobs,JobsInaplication,jobsInprogress) 
+      }
+
+    
     });
 
     console.log("done")
     
 }
+
+
+export function mystats(open,aplication,assigned){
+const ctx = document.getElementById('taskDonutChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Open', 'Aplication stage', 'Assigned'],
+          datasets: [{
+            data: [open, aplication, assigned],
+            backgroundColor: ['#4CAF50', '#FFC107', '#F44336'],
+            borderWidth: 2
+          }]
+        },
+        options: {
+          cutout: '60%', // Controls the hole size
+          plugins: {
+            legend: {
+      position: 'right', // <- Move legend to the right
+      labels: {
+        color: '#580cd1',
+        boxWidth: 20,
+        padding: 20
+      }
+    },
+
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  let label = context.label || '';
+                  let value = context.parsed;
+                  let total = context.chart._metasets[context.datasetIndex].total;
+                  let percentage = ((value / total) * 100).toFixed(1);
+                  return `${label}: ${value} (${percentage}%)`;
+                }
+              }
+            }
+          }
+        }
+      });
+
+    }
+
+
+
+
+
 
 
 
