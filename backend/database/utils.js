@@ -178,6 +178,7 @@ export async function getPayment(userID) {
 
 export async function  viewJobs(jobs) {
     const jobList= document.getElementById('joblist')
+    const activeJobList=document.getElementById('active-jobs')
     jobList.innerHTML = '';
     if (!jobs || jobs.length === 0) {
         jobList.innerHTML ='<p>you have not posted any jobs.</p>';
@@ -273,7 +274,11 @@ export async function  viewJobs(jobs) {
 
       form.append(jobname, showdetails, details);
       list.appendChild(form);
-      jobList.appendChild(list);
+           if(job.assigned!=true){
+              jobList.appendChild(list)
+      }else{
+        activeJobList.appendChild(list)
+      }
         
     });
 
