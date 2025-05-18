@@ -353,8 +353,8 @@ async newStatus(status,id){
     
               const updatedTasks=payload.new;
 
-                const totalCompletedTasks=taskDonutChart.data.datasets[0].data[0]
-                const notCompletedTasks=taskDonutChart.data.datasets[0].data[1]+1
+                let totalCompletedTasks=taskDonutChart.data.datasets[0].data[0]
+                let notCompletedTasks=taskDonutChart.data.datasets[0].data[1]+1
 
                 document.getElementById('total-tasks').innerText=notCompletedTasks+ totalCompletedTasks
                taskDonutChart.data.datasets[0].data = [totalCompletedTasks, notCompletedTasks];
@@ -371,8 +371,8 @@ async newStatus(status,id){
     
                 const updatedTasks=payload.new;
 
-                  const totalCompletedTasks=taskDonutChart.data.datasets[0].data[0]
-                  const notCompletedTasks=taskDonutChart.data.datasets[0].data[1]
+                  let totalCompletedTasks=taskDonutChart.data.datasets[0].data[0]
+                  let notCompletedTasks=taskDonutChart.data.datasets[0].data[1]
 
                 if (updatedTasks.status==true){
 
