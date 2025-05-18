@@ -219,7 +219,7 @@ export class Aplications {
 
         cv.addEventListener('click',async (e)=>{
             try {
-                const result= await this.showCV(this.freelancerID+'-cv.pdf')
+                const result= await this.showCV(this.freelancerID+'-cv')
             } catch (error) {
 
                 this.showAlert(error.message)              
