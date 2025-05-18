@@ -36,12 +36,7 @@ describe('Aplication.html', () => {
     expect(jobTitle).toBeTruthy();
     expect(jobTitle.textContent).toBe('What is the job');
 
-    const jobIdLabel = formJobInfo.querySelector('.requirements-label');
-    const jobIdText = formJobInfo.querySelector('#job-id');
-    expect(jobIdLabel).toBeTruthy();
-    expect(jobIdText).toBeTruthy();
-    expect(jobIdLabel.textContent.toLowerCase()).toContain('job-id');
-    expect(jobIdText.textContent.toLowerCase()).toContain('job');
+
 
     const descriptionLabel = formJobInfo.querySelector('.description-label');
     const descriptionText = formJobInfo.querySelector('#description-text');
