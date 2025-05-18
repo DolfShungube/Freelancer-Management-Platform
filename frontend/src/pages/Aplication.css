@@ -121,17 +121,18 @@
   }
 
 .aplicant-list {
+  height: 300px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 15px;
     width: 500px;
     padding: 10px;
     list-style: none;
     padding: 0;
-    margin: 1 auto; /* centers it */
+    margin:  auto;
     width: 100%; /* make it responsive */
     max-width: 600px;
     border: none;
-    max-height: calc(3 * 80px); /* assuming each <li> is 60px tall */
     overflow-y: auto;
     box-sizing: border-box;
     border-radius: 16px;
