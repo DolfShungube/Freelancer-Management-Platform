@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { fireEvent, getByPlaceholderText, getByText } from '@testing-library/dom'
 
-// Simulate the HTML page structure
+
 const html = `
   <h2 class="title">Reset Password</h2>
   <form id="form" action="" method="" class="form-box">
@@ -14,16 +14,13 @@ describe('changePassword.html', () => {
   let container
 
   beforeEach(() => {
-    // Set up DOM for each test
+    
     document.body.innerHTML = html
 
     container = document.body
 
-    // Optionally: import and run your JS module here to attach event listeners
-    // For example:
-    // await import('../../../backend/login/forgotPassword.js')
+    
   })
-
   it('renders the form and input elements', () => {
   const emailInput = getByPlaceholderText(container, 'Enter Email')
   const button = getByText(container, 'Change Password')
