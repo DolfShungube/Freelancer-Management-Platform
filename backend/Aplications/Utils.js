@@ -226,6 +226,10 @@ export class Aplications {
             }
         })
 
+        chat.addEventListener('click',(e)=>{
+             window.location.href = `chatbox.html?freelancerID=${this.freelancerID}`;
+        })
+
     }
 
 
