@@ -42,6 +42,9 @@
     </section>
   </form>
 
+  <button id="view-report-button">View Report</button>
+
+
   <section class="form-available-jobs">
     <h2>Available Jobs</h2>
     <ul class="job-list">
@@ -62,6 +65,19 @@
  
   <script type="module" src="../../../backend/Freelancer/Jobs.js"></script>
   <script type="module" src="../../../backend/Freelancer/freelancer_details.js"></script>
+ <script type="module" src="../../../backend/Freelancer/Freelancer_report.js"></script>
+ <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const reportBtn = document.getElementById('view-report-button');
+    if (reportBtn) {
+      reportBtn.addEventListener('click', () => {
+        // Just redirect to the template page
+        window.location.href = 'freelancerTemplate.html';
+      });
+    }
+  });
+</script>
+
 
 </body>
 </html>
