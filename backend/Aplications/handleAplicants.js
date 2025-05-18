@@ -5,7 +5,6 @@ import supabase from "../config/superbaseClient.js";
 const jobName= localStorage.getItem('jobName')
 document.getElementById('jobtitle').textContent=jobName
 const jobID = localStorage.getItem('jobID');
-document.getElementById('job-id').textContent=jobID
 const jobDescription = localStorage.getItem('jobDescription');
 document.getElementById('description-text').textContent=jobDescription
 const assignedFreelancer= localStorage.getItem('assignedFreelancer') //freelancerid
