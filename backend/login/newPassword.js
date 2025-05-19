@@ -31,7 +31,7 @@ form.addEventListener('submit',async (e)=>{
             showAlert(error.message,'error')
             
         }
-       window.location.replace('./login.html')
+   //    window.location.replace('./login.html')
 
 
 
