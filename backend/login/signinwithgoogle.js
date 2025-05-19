@@ -13,7 +13,7 @@ if(selectedtype===""){
   showAlert("please select an account Type to proceed","error")
 
 }
-else if(selectedtype="Admin"){
+else if(selectedtype==="Admin"){
 
     showAlert("Admins can only use email sign in","error")
   
