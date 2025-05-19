@@ -40,6 +40,9 @@ form.addEventListener('submit',async (e)=>{
 
         }else{
             showAlert("complete",'success') 
+                  setTimeout(() => {
+             window.location.replace('./login.html')
+        }, 2000);
 
         }
 
