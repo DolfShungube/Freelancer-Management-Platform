@@ -4,6 +4,23 @@ import supabase from "../config/superbaseClient.js"
 const form= document.getElementById('form')
 
 
+await useEffect(() => {
+  async function handleSession() {
+    const { data, error } = await supabase.auth.exchangeCodeForSession(window.location.href);
+    if (error) {
+      console.error('Error exchanging code for session:', error);
+
+    } else {
+      console.log('Session established:', data);
+
+    }
+  }
+
+  handleSession();
+}, []);
+
+
+
  
 form.addEventListener('submit',async (e)=>{
    const password2=document.getElementById('password').value
