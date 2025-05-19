@@ -250,7 +250,7 @@ export async function  viewJobs(jobs) {
 
         const jobname = document.createElement('h4');
         const sometext=job.jobName
-        jobname.textContent = sometext.length > 15 ? sometext.slice(0, 15) + "..." : sometext;
+        jobname.textContent = sometext.length > 10 ? sometext.slice(0, 10) + "..." : sometext;
         
 
         const showdetails = document.createElement('button');
