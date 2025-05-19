@@ -4,7 +4,7 @@ import supabase from "../config/superbaseClient.js"
 const form= document.getElementById('form')
 
 
-await useEffect(() => {
+
   async function handleSession() {
     const { data, error } = await supabase.auth.exchangeCodeForSession(window.location.href);
     if (error) {
@@ -16,8 +16,8 @@ await useEffect(() => {
     }
   }
 
-  handleSession();
-}, []);
+ await handleSession();
+
 
 
 
