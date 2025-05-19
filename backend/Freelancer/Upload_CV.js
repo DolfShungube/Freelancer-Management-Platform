@@ -138,6 +138,19 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
+    // CALL RPC TO UPDATE CV METADATA IN DB
+    const { error: rpcError } = await supabase
+      .rpc('upsert_freelancer_cv', {
+        f_id: freelancerID,
+        f_name: file.name
+      });
+
+    if (rpcError) {
+      console.error('Error updating CV metadata:', rpcError.message);
+      showAlert('Failed to update CV ', 'error');
+      return;
+    }
+
     showAlert(isReupload ? 'CV re-uploaded successfully!' : 'CV uploaded!', 'success');
 
     filenameDisplay.textContent = `Uploaded CV: ${file.name}`;
@@ -162,12 +175,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  document.addEventListener('click', async (e) => {
-    try{
-      const result = await this.showCV(this.freelancerID+'cv.pdf')
-
-    } catch (error){
-      this.showAlert(error.message)
-    }
-  });
+  // Optional: Remove unused click event listener from your snippet
 });

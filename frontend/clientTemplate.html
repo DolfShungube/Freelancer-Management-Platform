@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title>Client Job Dashboard</title>
   <link rel="stylesheet" href="clientTemplate.css">
+   
+  
 </head>
 <body>
   <h1>My Jobs</h1>
@@ -50,31 +52,9 @@
     </table>
   </fieldset>
 
-  <script>
-    async function loadJobs() {
-      const response = await fetch('/api/jobs');
-      const data = await response.json();
-
-      const createdBody = document.getElementById("created-jobs-body");
-      createdBody.innerHTML = ""; 
-      data.created_jobs.forEach(job => {
-        createdBody.innerHTML += `<tr><td>${job.name}</td></tr>`;
-      });
-
-      const applicationBody = document.getElementById("application-stage-body");
-      applicationBody.innerHTML = ""; 
-      data.application_stage_jobs.forEach(job => {
-        applicationBody.innerHTML += `<tr><td>${job.name}</td><td>${job.applicant}</td></tr>`;
-      });
-
-      const progressBody = document.getElementById("in-progress-body");
-      progressBody.innerHTML = ""; 
-      data.jobs_in_progress.forEach(job => {
-        progressBody.innerHTML += `<tr><td>${job.name}</td><td>${job.freelancer}</td><td>${job.progress}</td></tr>`;
-      });
-    }
-
-    window.onload = loadJobs;
-  </script>
+  
+  
 </body>
+
+
 </html>

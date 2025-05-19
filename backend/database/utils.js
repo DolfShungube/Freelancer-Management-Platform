@@ -196,31 +196,6 @@ export async function getFreelancer(userID) {
     
 }
 
-export async function getPayment(userID) {
-    let issue=''
-    try{
-            
-        const {data,error}= await superbase
-            .from('Payments')
-            .select('*')
-            .eq('jobID', userID) 
-
-            if(error){
-                issue=error.message
-                return issue
-            }else{
-                return data
-            }
-
-
-        
-    } catch (error) {
-        issue=error.message
-        
-    }
-    
-}
-
 
 {/* <p>Status: <span class="progress-label">${job.status}</span></p>
 <progress value="${job.progress}" max="100"></progress> */}

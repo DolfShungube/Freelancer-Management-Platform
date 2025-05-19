@@ -293,4 +293,19 @@ margin: 0;
 .job-card h3 {
   margin-top: 0;
 }
+.view-report-button{
+  background-color: black;
+  color: white;
+  border: none;
+  height: 40px;
+  width: 100px;
+  border-radius: 7px;
+  
+cursor:pointer;
 
+}
+.view-report-button:hover{
+  background-color: #444;
+  color: white;
+  transition: background-color 0.3s ease;
+}

@@ -17,62 +17,62 @@ const fetchUserNames = async () => {
     return;
   }
 
-  // Fetch names from the 'Freelancer' table
-  const { data, error } = await supabase
-    .from('Freelancer')
-    .select('firstname, lastname')
-    .eq('id', user.id)
-    .single();
+  // Fetch names via RPC
+  const { data, error } = await supabase.rpc('get_freelancer_name', {
+    freelancer_id: user.id,
+  });
 
-  if (error || !data) {
+  if (error || !data || data.length === 0) {
     firstnameDisplay.textContent = 'First Name: Not found';
     lastnameDisplay.textContent = 'Last Name: Not found';
     console.error(error);
     return;
   }
 
+  const { firstname, lastname } = data[0];
+
   // Set display and input values
-  firstnameDisplay.textContent = `First Name: ${data.firstname}`;
-  lastnameDisplay.textContent = `Last Name: ${data.lastname}`;
-  firstnameInput.value = data.firstname;
-  lastnameInput.value = data.lastname;
+  firstnameDisplay.textContent = `First Name: ${firstname}`;
+  lastnameDisplay.textContent = `Last Name: ${lastname}`;
+  firstnameInput.value = firstname;
+  lastnameInput.value = lastname;
 };
 
-// Toggle edit mode and update name
+// Toggle edit mode and update name via RPC
 window.toggleEdit = async (field) => {
   const display = document.getElementById(`${field}-display`);
   const input = document.getElementById(`${field}-input`);
 
-  // If input is hidden, show it
   if (input.classList.contains('hidden')) {
     input.classList.remove('hidden');
     input.focus();
   } else {
-    // Update in Supabase
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     if (authError || !user) {
       console.error('User not authenticated');
       return;
     }
 
-    const updateData = {};
-    updateData[field] = input.value;
+    const updatePayload = {
+      freelancer_id: user.id,
+      new_firstname: null,
+      new_lastname: null,
+    };
 
-    const { error } = await supabase
-      .from('Freelancer')
-      .update(updateData)
-      .eq('id', user.id);
+    updatePayload[`new_${field}`] = input.value;
+
+    const { error } = await supabase.rpc('update_freelancer_name', updatePayload);
 
     if (error) {
       console.error(`Failed to update ${field}:`, error);
+      alert('Failed to update. Please try again.');
       return;
     }
 
-    // Update frontend display
     display.textContent = `${field.charAt(0).toUpperCase() + field.slice(1)}: ${input.value}`;
     input.classList.add('hidden');
   }
 };
 
-// Call on load
+// Call on page load
 fetchUserNames();
