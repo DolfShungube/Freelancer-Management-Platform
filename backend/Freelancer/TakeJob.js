@@ -1,4 +1,4 @@
-import supabase from '../../../backend/config/superbaseClient.js';
+import supabase from '../config/superbaseClient.js';
 
 // SweetAlert2 reusable alert function
 function showAlert(message, type = 'info') {
