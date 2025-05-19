@@ -2,7 +2,8 @@
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-  test: { 
+  test: {
+    globals: true,   
     environment: 'jsdom', 
     globals: true,
     coverage: {
