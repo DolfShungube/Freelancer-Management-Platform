@@ -12,7 +12,15 @@ if(selectedtype===""){
 
   showAlert("please select an account Type to proceed","error")
 
-}else{
+}
+else if(selectedtype="Admin"){
+
+    showAlert("Admins can only use email sign in","error")
+  
+
+}
+
+else{
   signIn(selectedtype)
 }
 
