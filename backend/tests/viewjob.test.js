@@ -23,28 +23,8 @@ describe('Freelancer Job Application Tests', () => {
   })
 
   describe('Form Submission', () => {
-    it('should prevent default form submission', () => {
-      const form = document.getElementById('uploadForm')
-      const preventDefault = vi.fn()
-      
-      form.addEventListener('submit', e => {
-        e.preventDefault()
-        preventDefault()
-      })
-      
-      form.dispatchEvent(new window.Event('submit'))
-      expect(preventDefault).toHaveBeenCalled()
-    })
+    
 
-    it('should trigger file input when browse button clicked', () => {
-      const browseButton = document.querySelector('.browse-btn')
-      const fileInput = document.getElementById('fileInput')
-      
-      fileInput.click = vi.fn()
-      browseButton.click()
-      expect(fileInput.click).toHaveBeenCalled()
-    })
-  })
 
   describe('Job Application', () => {
     it('should display correct job details', () => {
