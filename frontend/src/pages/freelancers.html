@@ -5,31 +5,30 @@
   <title>Select a Client - Freelancio Chat</title>
   <script type="module">
     import supabase from "../../../backend/config/superbaseClient.js";
+
+    import checkUnreadMessages  from "../../../backend/Client/unreadmessages.js";
   
-    async function loadClients() {
-      //  Get all clientIDs from Jobs table
-      const { data: jobData, error: jobError } = await supabase
-        .from('Jobs')
-        .select('freelancerID');
-  
-      if (jobError) {
-        console.error('Error loading jobs:', jobError.message);
+    // Moved to Backend -Done
+    async function loadFreelancers() {
+      //  Get all freelancers with assigned jobs
+      const { data:freelancers, error } = await supabase.rpc('get_freelancers_with_assigned_jobs');
+
+      if (error) {
+        console.error('Error fetching freelancers:', error.message);
+      } else {
+            console.log('Assigned freelancers:', freelancers);
+      }
+
+
+      // I need to fix this unread message 
+      const { data: userData, error: userError } = await supabase.auth.getUser();
+      if (userError || !userData?.user) {
+        console.error("Error fetching user:", userError);
         return;
       }
-  
-      //  Get unique client IDs
-      const uniqueFreelancerIDs = [...new Set(jobData.map(job => job.freelancerID))];
-  
-      //  Fetch all clients who match those IDs
-      const { data: freelancers, error: freelancerError } = await supabase
-        .from('Freelancer')
-        .select('id, firstname')
-        .in('id', uniqueFreelancerIDs);  // Filter only those with jobs
-  
-      if (freelancerError) {
-        console.error('Error loading clients:', freelancerError.message);
-        return;
-      }
+      const user = userData.user;
+      const unreadMessages =await checkUnreadMessages(user.id);
+      const unreadFreelancerIDs =unreadMessages.map(msg=>msg.freelancerid);
   
       // Render client list
       const freelancerList = document.getElementById('client-list');
@@ -39,6 +38,12 @@
         // Create chat-like entry for each client
         const listItem = document.createElement('li');
         listItem.classList.add('chat-entry');
+        console.log("Unread Messages",unreadMessages);
+        console.log("Unread Messages sent by freelancer",unreadFreelancerIDs);
+        if(unreadFreelancerIDs.includes(freelancer.id)) {
+        console.log("this is running")
+        listItem.classList.add("has-unread"); // Add class instead of creating an element
+        }
         
         // Avatar with the first letter of the client's name
         const avatar = document.createElement('p');
@@ -65,7 +70,7 @@
       });
     }
   
-    loadClients();
+    loadFreelancers();
   </script>
   
   <style>
@@ -75,6 +80,20 @@
       margin: 0;
       padding: 0;
       background-color: #f3f3f3;
+    }
+    .chat-entry {
+    position: relative;
+    }
+
+    .has-unread::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 12px;
+    height: 12px;
+    background-color: red;
+    border-radius: 50%;
     }
 
     /* Chat-style header */

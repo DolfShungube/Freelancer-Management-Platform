@@ -309,3 +309,23 @@ cursor:pointer;
   color: white;
   transition: background-color 0.3s ease;
 }
+
+.chat-btn {
+  position: relative; /* Ensure the button is the reference for absolute positioning */
+}
+
+.chat-btn::after {
+  content: "";
+  position: absolute;
+  top: 0px; 
+  right: 0px; 
+  width: 12px;
+  height: 12px;
+  background-color: red;
+  border-radius: 50%;
+  display: none; /* Initially hidden */
+}
+
+.chat-btn.has-unread::after {
+  display: block; /* Show red dot when there are unread messages */
+}
