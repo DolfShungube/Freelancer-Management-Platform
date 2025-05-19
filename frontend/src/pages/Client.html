@@ -44,9 +44,11 @@
              </li>
 
              <li>
-              <a href="freelancers.html">
-                <img src="../pages/images/bubble-chat.png" alt="Chat Icon" width="30" height="30">
-              </a>
+              <button type="button" class="chat-btn"
+              onclick="window.location.href='freelancers.html'" aria-label="Open Chat"
+              style="background-color: #fff; border: none; border-radius: 50%; padding: 0.5rem; cursor: pointer; margin-left: auto;">
+              <img src="../../src/pages/images/bubble-chat.png" alt="Chat" style="width: 30px; height: 30px;">
+            </button>
             </li>
             </ul>
           </aside>
@@ -115,13 +117,9 @@
           </section>
 
 
-
-
-
-
-
     </main>
-
+<script type="module" src="../../../backend/Client/unreadmessages.js"></script>
+    
  <script>
   document.addEventListener('DOMContentLoaded', () => {
     const reportBtn = document.getElementById('docButton');
@@ -133,6 +131,7 @@
     }
   });
 </script>
+ 
 
 
     

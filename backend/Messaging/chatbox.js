@@ -23,6 +23,8 @@ console.log("currenlty logged in user", user.id)
 
 let chat;
 if(freelancerID){
+
+  //need to change change this also
   console.log('freelacer dolf')
 
     const { data: userData, error: fetchError1 } = await supabase
@@ -71,7 +73,7 @@ sendButton.addEventListener('click', async () => {
     if (msg !== '') {
         try {
             
-            const response = await chat.createMassage(user.id,freelancerID, userData[0]?.id, msg, false);
+            const response = await chat.createMessage(user.id,freelancerID, userData[0]?.id, msg, false);
             messageInput.value = "";
             console.log('The response of logged in as client',response);
             if (response) {
@@ -104,6 +106,7 @@ messageInput.addEventListener('keydown', (event) => {
    
 }else{
     
+   // change fecthing jobs for a function
     const { data: userData, error: fetchError1 } = await supabase
     .from("Jobs")
     .select("id")
@@ -143,15 +146,11 @@ messageInput.addEventListener('keydown', (event) => {
     if (msg !== '') {
         try {
             
-            const response = await chat.createMassage(clientID,user.id, userData[0]?.id, msg, true);
+            const response = await chat.createMessage(clientID,user.id, userData[0]?.id, msg, true);
             messageInput.value = "";
             console.log('The response of logged in as client',response);
             if (response) {
-              setTimeout(() => {
-                messageInput.value = "";  // Force clear the input field
-            }, 100);  
-            } else {
-              console.log('Failed to send message');
+              messageInput.value = ""; 
             }
           } catch (error) {
             console.log('Error sending message:', error);
