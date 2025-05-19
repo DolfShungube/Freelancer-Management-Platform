@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const { error: uploadError } = await supabase
             .storage
             .from('user-documents')
-            .upload(filePath, file);
+            .upload(filePath, file, { upsert: true });
 
         if (uploadError) {
             showAlert('Contract upload failed.', 'error');
