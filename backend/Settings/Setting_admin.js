@@ -9,7 +9,6 @@ const fetchUserNames = async () => {
 
   // Get current user
   const { data: userData, error: authError } = await supabase.auth.getUser();
-
   if (authError || !userData?.user) {
     firstnameDisplay.textContent = 'First Name: Not logged in';
     lastnameDisplay.textContent = 'Last Name: Not logged in';
@@ -19,42 +18,37 @@ const fetchUserNames = async () => {
 
   const user = userData.user;
 
+  // Fetch names via RPC
+  const { data, error } = await supabase.rpc('get_admin_name', {
+    admin_id: user.id,
+  });
 
-  // Fetch names from the 'Client' table using 'user_id'
-  const { data, error } = await supabase
-    .from('Admin')
-    .select('firstname, lastname')
-    .eq('id', user.id) // <-- use user_id instead of id
-    .single();
-
-  if (error || !data) {
-    console.log(error);
+  if (error || !data || data.length === 0) {
     firstnameDisplay.textContent = 'First Name: Not found';
     lastnameDisplay.textContent = 'Last Name: Not found';
     console.error('Fetch error:', error);
     return;
   }
 
+  const { firstname, lastname } = data[0];
+
   // Set display and input values
-  firstnameDisplay.textContent = `First Name: ${data.firstname}`;
-  lastnameDisplay.textContent = `Last Name: ${data.lastname}`;
-  firstnameInput.value = data.firstname;
-  lastnameInput.value = data.lastname;
+  firstnameDisplay.textContent = `First Name: ${firstname}`;
+  lastnameDisplay.textContent = `Last Name: ${lastname}`;
+  firstnameInput.value = firstname;
+  lastnameInput.value = lastname;
 };
 
-// Toggle edit mode and update name
+// Toggle edit mode and update name using RPC
 window.toggleEdit = async (field) => {
   const display = document.getElementById(`${field}-display`);
   const input = document.getElementById(`${field}-input`);
 
-  // If input is hidden, show it
   if (input.classList.contains('hidden')) {
     input.classList.remove('hidden');
     input.focus();
   } else {
-    // Get current user
     const { data: userData, error: authError } = await supabase.auth.getUser();
-
     if (authError || !userData?.user) {
       console.error('User not authenticated:', authError);
       return;
@@ -62,17 +56,20 @@ window.toggleEdit = async (field) => {
 
     const user = userData.user;
 
+    const updatePayload = {
+      admin_id: user.id,
+      new_firstname: null,
+      new_lastname: null,
+    };
 
-    const updateData = {};
-    updateData[field] = input.value;
+    // Only update the edited field
+    updatePayload[`new_${field}`] = input.value;
 
-    const { error: updateError } = await supabase
-      .from('Admin')
-      .update(updateData)
-      .eq('id', user.id); // <-- use user_id instead of id
+    const { error: rpcError } = await supabase.rpc('update_admin_name', updatePayload);
 
-    if (updateError) {
-      console.error(`Failed to update ${field}:`, updateError);
+    if (rpcError) {
+      console.error(`Failed to update ${field}:`, rpcError);
+      alert('Failed to update. Please try again.');
       return;
     }
 

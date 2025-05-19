@@ -15,10 +15,9 @@ const fetchinfo = async () => {
 
   // Fetch freelancer details by user ID
   const { data, error } = await supabase
-    .from('Freelancer')
-    .select("*")
-    .eq("id", user.id)
-    .single();
+  .rpc('get_freelancer_by_user_id', { uid: user.id })
+  .single(); // returns a single object instead of an array
+
 
   if (error || !data) {
     Freelancer_info.innerHTML = '<p>Could not find profile.</p>';
@@ -40,4 +39,14 @@ const fetchinfo = async () => {
   Freelancer_info.appendChild(FreelancerProfile);
 };
 
+
 fetchinfo(); // Call the function when the script loads
+document.getElementById("logout").addEventListener("click", async () => {
+  const { error } = await supabase.auth.signOut();
+  if (error) {
+    console.error("Logout failed:", error.message);
+  } else {
+    // Redirect to login page after logout
+    window.location.href = "login.html";  // change to your login page path
+  }
+});

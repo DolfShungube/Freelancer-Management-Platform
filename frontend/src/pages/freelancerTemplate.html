@@ -6,56 +6,40 @@
   <link rel="stylesheet" href="freelancerTemplate.css">
 </head>
 <body>
+<section id="freelancer-report">
+  <h2>Freelancer Job Report</h2>
+  <button id="download-Report-pdf" class="download-Report-pdf">Download report</button>
 
-  <h1>Freelancer: My Jobs</h1>
+  <h3>Jobs In Progress</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Job Name</th>
+        <th>Client Name</th>
+        <th>Status</th>
+        <th> Progress</th>
+      </tr>
+    </thead>
+    <tbody id="freelancer-progress-body"></tbody>
+  </table>
 
-  <fieldset>
-    <legend>Jobs Applied For</legend>
-    <table>
-      <thead>
-        <tr><th>Job Name</th><th>Status</th></tr>
-      </thead>
-      <tbody id="applied-jobs-body">
-      </tbody>
-    </table>
-  </fieldset>
+  <h3>Applied Jobs</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Job Name</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="applied-jobs-body"></tbody>
+  </table>
+</section>
+  
 
-  <fieldset>
-    <legend>Jobs in Progress</legend>
-    <table>
-      <thead>
-        <tr><th>Job Name</th><th>Client</th><th>Status</th></tr>
-      </thead>
-      <tbody id="freelancer-progress-body">
-      </tbody>
-    </table>
-  </fieldset>
-
-  <script>
-    async function loadFreelancerJobs() {
-      try {
-        const res = await fetch('/api/freelancer-jobs');
-        const data = await res.json();
-
-        const appliedBody = document.getElementById("applied-jobs-body");
-        appliedBody.innerHTML = "";
-        data.applied_jobs.forEach(job => {
-          appliedBody.innerHTML += `<tr><td>${job.name}</td><td>${job.status}</td></tr>`;
-        });
-
-        const progressBody = document.getElementById("freelancer-progress-body");
-        progressBody.innerHTML = "";
-        data.in_progress_jobs.forEach(job => {
-          progressBody.innerHTML += `<tr><td>${job.name}</td><td>${job.client}</td><td>${job.status}</td></tr>`;
-        });
-
-      } catch (error) {
-        console.error("Failed to load freelancer jobs:", error);
-      }
-    }
-
-    window.onload = loadFreelancerJobs;
-  </script>
+ 
+ <script type="module" src="../../../backend/Freelancer/Freelancer_report.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script type="module" src="../../../backend/Freelancer/Dowload_Report.js"></script>
 
 </body>
 </html>

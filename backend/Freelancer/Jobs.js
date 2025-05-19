@@ -12,24 +12,11 @@ const fetchJobs = async () => {
 
   const currentUserID = authData.user.id;
 
-  const { data, error } = await supabase
-    .from('Jobs')
-    .select(`
-    clientID,
-      id,
-      jobName,
-      description,
-      assigned,
-      freelancerID,
-      Client (
-        firstname,
-        lastname
-      )
-    `);
+  const { data, error } = await supabase.rpc('get_jobs_with_client');
 
   if (error) {
     jobsList.innerHTML = '<li>Could not fetch jobs.</li>';
-    console.error(error);
+    
     return;
   }
 
@@ -43,11 +30,12 @@ const fetchJobs = async () => {
   data.forEach(job => {
     const jobCard = document.createElement('li');
     const status = job.assigned ? 'Assigned' : 'Available';
-
+    
+    
     jobCard.innerHTML = `
       <form class="job-card">
-        <h3>${job.jobName}</h3>
-        <p><strong>Client:</strong> ${job.Client.firstname} ${job.Client.lastname}</p>
+        <h3>${job.jobname}</h3>
+        <p><strong>Client:</strong> ${job.firstname} ${job.lastname}</p>
         <p><strong>Status:</strong> ${status}</p>
         <button type="button" class="view-details-btn">View Details</button>
       </form>
@@ -56,23 +44,21 @@ const fetchJobs = async () => {
     const viewBtn = jobCard.querySelector('.view-details-btn');
     viewBtn.addEventListener('click', () => {
       if (job.assigned) {
-        // If job is assigned to anyone, open progress
         localStorage.setItem('jobID', job.id);
-        localStorage.setItem('jobName',job.jobName)
-        localStorage.setItem('jobDescription',job.description)
-        localStorage.setItem('assignedFreelancer',job.freelancerID)
-        localStorage.setItem('client',job.clientID)
-        localStorage.setItem('job',JSON.stringify(job))
-        localStorage.setItem('userType','freelancer')
+        localStorage.setItem('jobName', job.jobname);
+        localStorage.setItem('jobDescription', job.description);
+        localStorage.setItem('assignedFreelancer', job.freelancerID);
+        localStorage.setItem('client', job.clientID);
+        localStorage.setItem('job', JSON.stringify(job));
+        localStorage.setItem('userType', 'freelancer');
         window.location.href = './progress.html';
       } else {
-        //  If job is unassigned, open ViewJob.html with details
         const params = new URLSearchParams({
           id: job.id,
-          jobName: job.jobName,
+          jobName: job.jobname,
           description: job.description,
-          firstname: job.Client.firstname,
-          lastname: job.Client.lastname
+          firstname: job.firstname,     // FIXED
+          lastname: job.lastname        // FIXED
         });
         window.location.href = `ViewJob.html?${params.toString()}`;
       }

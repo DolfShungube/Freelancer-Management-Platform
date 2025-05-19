@@ -43,3 +43,19 @@ th {
 td {
   background-color: #fdfdfd;
 }
+.download-Report-pdf{
+  background-color: blue;
+  color: white;
+  border: none;
+  height: 40px;
+  width: 100px;
+  border-radius: 7px;
+  
+cursor:pointer;
+
+}
+.download-Report-pdf:hover{
+  background-color: #444;
+  color: white;
+  transition: background-color 0.3s ease;
+}
