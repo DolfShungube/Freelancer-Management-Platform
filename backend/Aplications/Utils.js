@@ -1,4 +1,5 @@
-import supabase from '../config/superbaseClient.js'
+import {supabase} from '../config/superbaseClient.js'
+import Swal from 'sweetalert2';
 //change the below lines to getdocumentbyid if required :)
 const aplicationList= document.querySelector('Aplications')
 //add show alert later
@@ -26,9 +27,7 @@ export class Aplications {
     async getFreelancer(){
         try {
             const { data: aplications, error } = await supabase
-            .from('Freelancer')
-            .select('*')
-            .eq('id', this.freelancerID)
+            .rpc('getFreelancer', { fid: this.freelancerID });
 
             if(error){
                 this.showAlert(error.message,'error');
@@ -52,20 +51,8 @@ export class Aplications {
     async AcceptAplication(){
         try {
             const { data: aplications, error } = await supabase
-            .from('Aplications')
-            .update({ status: true})
-            .match({'freelancerID':this.freelancerID,jobID:this.projectID})
+            .rpc('assign_freelancer', {job_id: this.projectID,selected_freelancer_id: this.freelancerID,});
 
-            const { data: rejected, error: rejectError } = await supabase
-            .from('Aplications')
-            .update({ status: false })
-            .neq('freelancerID', this.freelancerID)
-            .match({ jobID: this.projectID });
-
-            const { data, error2 } = await supabase
-            .from('Jobs')
-            .update({ freelancerID: this.freelancerID, assigned:true})
-            .match({id:this.projectID})
 
             if(error){
                 this.showAlert(error.message,'error');
@@ -87,9 +74,8 @@ export class Aplications {
     async RejectAplication(){
         try {
             const { data: aplications, error } = await supabase
-            .from('Aplications')
-            .update({ status: false})
-            .match({'freelancerID':this.freelancerID,jobID:this.projectID})
+            .rpc('reject_freelancer', {job_id: this.projectID,selected_freelancer_id: this.freelancerID})
+
 
             if(error){
                 this.showAlert(error.message,'error');

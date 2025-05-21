@@ -1,4 +1,5 @@
-import supabase from '../config/superbaseClient.js'
+import {supabase} from '../config/superbaseClient.js'
+import Swal from 'sweetalert2';
 //change the below lines to getdocumentbyid if required :)
 
 //const writeNewMessage = document.getElementById('messageInput');
@@ -82,7 +83,8 @@ class Messages {
 
         try {
              
-            const { data:messages, error } = await supabase.rpc('get_messages');
+            const { data:messages, error } = await supabase
+            .rpc('get_project_messages', {client_id: this.clientID,freelancer_id: this.freelancerID,project_id: this.projectID});
             console.log("The messages",messages);
 
             if(error){
