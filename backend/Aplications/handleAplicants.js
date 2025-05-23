@@ -3,7 +3,7 @@ import supabase from "../config/superbaseClient.js";
 
 
 const jobName= localStorage.getItem('jobName')
-document.getElementById('jobtitle').textContent=jobName
+document.getElementById('jobtitle').textContent= jobName
 const jobID = localStorage.getItem('jobID');
 const jobDescription = localStorage.getItem('jobDescription');
 document.getElementById('description-text').textContent=jobDescription

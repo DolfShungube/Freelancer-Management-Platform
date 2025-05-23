@@ -16,14 +16,15 @@ const jobId = params.get('id');
 const firstName = params.get('firstname') || 'First';
 const lastName = params.get('lastname') || 'Last';
 const description = params.get('description') || 'No description provided.';
+const jobName = params.get('jobName');
 
-// Wait for DOM to load
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  const jobNames = document.getElementById('job-title');
   const applyBtn = document.getElementById('apply-btn');
   const clientName = document.getElementById('client-name');
   const descriptionText = document.getElementById('description-text');
 
-  if (!applyBtn || !clientName || !descriptionText) {
+  if (!applyBtn || !clientName || !descriptionText || !jobNames) {
     console.error('Required DOM elements not found.');
     return;
   }
@@ -31,23 +32,49 @@ document.addEventListener('DOMContentLoaded', () => {
   // Fill in job details
   clientName.textContent = `${firstName} ${lastName}`;
   descriptionText.textContent = description;
+  console.log("jobName from URL:", jobName);
+  jobNames.textContent = `Job Title: ${jobName || 'Unknown'}`;
 
+  // Get the logged-in user
+  const { data: authData, error: authError } = await supabase.auth.getUser();
+  if (authError || !authData?.user) {
+    showAlert('User not authenticated.', 'error');
+    applyBtn.disabled = true;
+    applyBtn.textContent = 'Please log in to apply';
+    return;
+  }
+
+  const freelancerID = authData.user.id;
+
+  if (!jobId) {
+    showAlert('No job ID found!', 'error');
+    applyBtn.disabled = true;
+    return;
+  }
+
+  try {
+    // Check if user has already applied using your has_applied RPC function
+    const { data: hasApplied, error: hasAppliedError } = await supabase.rpc('has_applied', {
+      p_job_id: jobId,
+      p_freelancer_id: freelancerID
+    });
+
+    if (hasAppliedError) {
+      console.error('Error checking application status:', hasAppliedError);
+      // Allow applying anyway but maybe warn user?
+    } else if (hasApplied === true || (Array.isArray(hasApplied) && hasApplied[0] === true)) {
+      // User already applied — disable button and show message
+      applyBtn.disabled = true;
+      applyBtn.textContent = 'Your application has already been submitted';
+      return; // no need to add event listener
+    }
+  } catch (error) {
+    console.error('Unexpected error:', error);
+  }
+
+  // If not applied, allow application
   applyBtn.addEventListener('click', async (e) => {
     e.preventDefault();
-
-    if (!jobId) {
-      showAlert('No job ID found!', 'error');
-      return;
-    }
-
-    // Get the logged-in user
-    const { data: authData, error: authError } = await supabase.auth.getUser();
-    if (authError || !authData?.user) {
-      showAlert('User not authenticated.', 'error');
-      return;
-    }
-
-    const freelancerID = authData.user.id;
 
     // Get freelancer details using RPC
     const { data: freelancer, error: freelancerError } = await supabase.rpc('get_freelancer_by_user_id', { uid: freelancerID });
@@ -65,14 +92,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (insertError) {
-      
       showAlert('Application failed.', 'error');
       return;
     }
 
-    // Show success and redirect
+    // Show success, disable button, and redirect after delay
     showAlert('Application submitted successfully!', 'success');
-    applyBtn.style.display = 'none';
+    applyBtn.disabled = true;
+    applyBtn.textContent = 'Your application has been submitted';
 
     setTimeout(() => {
       window.location.href = 'Freelancer.html';
