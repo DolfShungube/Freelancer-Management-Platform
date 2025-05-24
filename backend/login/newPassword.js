@@ -1,5 +1,5 @@
 import {showAlert} from "./utils.js"
-import supabase from "../config/superbaseClient.js"
+import {supabase} from "../config/superbaseClient.js"
 
 const form= document.getElementById('form')
 

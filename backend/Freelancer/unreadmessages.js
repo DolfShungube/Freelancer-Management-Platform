@@ -1,4 +1,4 @@
-import supabase from "../config/superbaseClient.js";
+import {supabase} from "../config/superbaseClient.js";
 
 //  Move function outside `DOMContentLoaded`
 async function checkUnreadMessages(userID) {

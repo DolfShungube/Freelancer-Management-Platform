@@ -9,11 +9,12 @@ const supabaseUrl = config.SUPABASE_URL
 
 const supabaseKey = config.SUPABASE_ANON_KEY
 
-const supabase = createClient(supabaseUrl, supabaseKey, {
+export const supabase = createClient(supabaseUrl, supabaseKey, {
     auth: {
       persistSession: true,
       autoRefreshToken: true,
     }
   });
 
-export default supabase
+
+

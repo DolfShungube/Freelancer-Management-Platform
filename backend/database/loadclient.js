@@ -1,5 +1,5 @@
 import { addNewJob,addNewPayment,userProfile,clientJobs, viewJobs, getPayment } from "./utils.js";
-import supabase from "../config/superbaseClient.js";
+import {supabase} from "../config/superbaseClient.js";
 
 
 

@@ -2,7 +2,7 @@
 
 
 const userType= localStorage.getItem('userType')
-import supabase from '../config/superbaseClient.js'
+import {supabase} from '../config/superbaseClient.js'
 
 export class Progress{
 

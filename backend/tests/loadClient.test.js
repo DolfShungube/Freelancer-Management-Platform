@@ -19,14 +19,16 @@ beforeAll(async () => {
 
 // Mock supabase and utils
 vi.mock('../config/superbaseClient.js', () => ({
-  default: {
+  supabase: {
     auth: {
-      getSession: vi.fn(() => Promise.resolve({
-        data: { session: { user: { id: 'user-123' } } }
-      }))
+      getSession: vi.fn(() =>
+        Promise.resolve({
+          data: { session: { user: { id: 'user-123' } } }
+        })
+      )
     }
   }
-}))
+}));
 
 vi.mock('../database/utils.js', () => ({
   addNewJob: vi.fn(),

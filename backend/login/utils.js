@@ -1,5 +1,5 @@
- import supabase from '../config/superbaseClient.js';
-import superbase from '../config/superbaseClient.js'
+
+import {supabase} from '../config/superbaseClient.js'
  export function getDetails(){
     const details={userType:"",email:"",password:""}
 
@@ -66,7 +66,7 @@ export async function handleUserInput(detailValues){
     
     try {
 
-        const {data,error} = await superbase.auth.signInWithPassword({
+        const {data,error} = await supabase.auth.signInWithPassword({
             email: detailValues.email,
             password: detailValues.password
            })
@@ -78,7 +78,7 @@ export async function handleUserInput(detailValues){
 
                 const user = data.user;
                 try {
-                    const { data: Account,error: accountError } = await superbase
+                    const { data: Account,error: accountError } = await supabase
                     .from(detailValues.userType) 
                     .select('id')
                     .eq('id', user.id)

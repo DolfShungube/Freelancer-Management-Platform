@@ -1,4 +1,4 @@
-import supabase from "../config/superbaseClient.js";
+import {supabase} from "../config/superbaseClient.js";
 import { showAlert } from "./utils.js";
 const googleButton= document.getElementById('SignInWithGoogle');
 

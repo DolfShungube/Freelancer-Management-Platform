@@ -1,4 +1,4 @@
-import superbase from '../config/superbaseClient.js'
+import {supabase} from '../config/superbaseClient.js'
 
 import {progressReport}  from '../progressReport/Utils.js'
 
@@ -8,7 +8,7 @@ export async function addNewJob(clientID,projectName,projectDescription,amount){
 
     try {
 
-        const {data,error}= await superbase
+        const {data,error}= await supabase
             .from('Jobs')
             .insert([
                 {clientID: clientID,jobName: projectName,description: projectDescription,assigned:false}
@@ -47,7 +47,7 @@ export async function addNewPayment(jobID,amount) {
     let issue=''
     try{
             
-        const {data,error}= await superbase
+        const {data,error}= await supabase
             .from('Payments')
             .insert([
                 {jobID:jobID,amount:amount,status:false}
@@ -76,10 +76,10 @@ export async function addNewPayment(jobID,amount) {
 
 
 export async function userProfile(userID,userType){
-   const issue=''
+   let issue=''
     try{
             
-        const {data,error}= await superbase
+        const {data,error}= await supabase
             .from(userType)
             .select('*')
             .eq('id',userID)
@@ -101,10 +101,10 @@ export async function userProfile(userID,userType){
 }
 
 export async function aplicantCount(jobID){
-   const issue=''
+   let issue=''
     try{
             
-        const {data,error}= await superbase
+        const {data,error}= await supabase
             .from("Aplications")
             .select('*')
             .eq('jobID',jobID)
@@ -150,7 +150,7 @@ export async function clientJobs(userID) {
     let issue=''
     try{
             
-        const {data,error}= await superbase
+        const {data,error}= await supabase
             .from('Jobs')
             .select('*')
             .eq('clientID', userID) 
@@ -175,7 +175,7 @@ export async function getFreelancer(userID) {
     let issue=''
     try{
             
-        const {data,error}= await superbase
+        const {data,error}= await supabase
             .from('Freelancer')
             .select('*')
             .eq('id', userID) 
@@ -200,7 +200,7 @@ export async function getPayment(userID) {
     let issue=''
     try{
             
-        const {data,error}= await superbase
+        const {data,error}= await supabase
             .from('Payments')
             .select('*')
             .eq('jobID', userID) 

@@ -17,7 +17,7 @@ if(userType==='Client'){
 }
 
 
-import supabase from "../config/superbaseClient.js"
+import {supabase} from "../config/superbaseClient.js"
 import { Progress } from "./Utils.js"
 
 

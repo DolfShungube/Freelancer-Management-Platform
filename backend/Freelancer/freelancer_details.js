@@ -1,4 +1,4 @@
-import supabase from '../config/superbaseClient.js';
+import {supabase} from '../config/superbaseClient.js';
 
 const fetchinfo = async () => {
   const Freelancer_info = document.querySelector('.form-profile .profile-text');

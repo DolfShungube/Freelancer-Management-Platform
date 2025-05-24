@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import checkUnreadMessages from '../Client/unreadmessages.js';
-import supabase from '../config/superbaseClient.js';
+import {supabase} from '../config/superbaseClient.js';
 
 vi.mock('../config/superbaseClient.js', () => {
   return {
-    default: {
+    supabase: {
       rpc: vi.fn(),
     },
   };

@@ -1,4 +1,4 @@
-import supabase from '../config/superbaseClient.js';
+import {supabase} from '../config/superbaseClient.js';
 
 const fetchJobs = async () => {
   const jobsList = document.querySelector('.job-list');

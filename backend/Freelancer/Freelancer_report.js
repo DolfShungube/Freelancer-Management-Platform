@@ -1,4 +1,4 @@
-import supabase from '../config/superbaseClient.js';
+import {supabase} from '../config/superbaseClient.js';
 import { progressCalculator } from '../database/utils.js';
 import { progressReport } from '../progressReport/Utils.js';
 

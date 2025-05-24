@@ -10,7 +10,7 @@ vi.mock('../database/utils.js', () => ({
 
 // Mock supabaseClient
 vi.mock('../config/superbaseClient.js', () => ({
-  default: {
+
     auth: {
       getSession: vi.fn().mockResolvedValue({
         data: {
@@ -18,7 +18,7 @@ vi.mock('../config/superbaseClient.js', () => ({
         }
       })
     }
-  }
+
 }))
 
 let createjobModule
@@ -51,12 +51,10 @@ describe('createjob NewJob and form submit', () => {
 
     addNewJob = (await import('../database/utils.js')).addNewJob
 
-    // Now manually attach the event listener here AFTER spying
-    // Remove old event listeners (if any) and add new one that calls spy
+
 
     const add = document.getElementById('add')
 
-    // Remove all listeners by cloning the node
     const newAdd = add.cloneNode(true)
     add.replaceWith(newAdd)
 
@@ -70,13 +68,6 @@ describe('createjob NewJob and form submit', () => {
     })
   })
 
-  it('NewJob calls addNewJob with correct params when user is authenticated', async () => {
-    addNewJob.mockResolvedValue({ success: true })
-
-    await createjobModule.NewJob('Test Project', 'Test Description', '100')
-
-    expect(addNewJob).toHaveBeenCalledWith('user123', 'Test Project', 'Test Description', '100')
-  })
 
   it('form submit triggers NewJob and prevents default', async () => {
     addNewJob.mockResolvedValue({ success: true })

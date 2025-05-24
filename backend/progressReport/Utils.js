@@ -1,5 +1,5 @@
 
-import supabase from "../config/superbaseClient.js";
+import {supabase} from "../config/superbaseClient.js";
 export class progressReport{
 
  constructor(){

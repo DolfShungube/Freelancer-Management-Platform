@@ -9,11 +9,11 @@
  
  const supabaseRole = config.SUPABASE_SERVICE_ROLE
  
- const supabase1 = createClient(supabaseUrl, supabaseRole, {
+ export const supabase1 = createClient(supabaseUrl, supabaseRole, {
      auth: {
        persistSession: true,
        autoRefreshToken: true,
      }
    });
  
- export default supabase1
+ //export default supabase1
