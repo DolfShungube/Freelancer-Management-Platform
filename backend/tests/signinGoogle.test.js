@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 // Mock supabase client
 vi.mock('../config/superbaseClient.js', () => ({
-  default: {
+  supabase: {
     auth: {
       signInWithOAuth: vi.fn(),
     },
@@ -14,7 +14,7 @@ vi.mock('../login/utils.js', () => ({
   showAlert: vi.fn(),
 }));
 
-import supabase from '../config/superbaseClient.js';
+import {supabase} from '../config/superbaseClient.js';
 import { showAlert } from '../login/utils.js';
 
 beforeEach(async () => {

@@ -1,5 +1,5 @@
 import {Aplications} from './Utils.js'
-import supabase from "../config/superbaseClient.js";
+import {supabase} from "../config/superbaseClient.js";
 
 
 const jobName= localStorage.getItem('jobName')

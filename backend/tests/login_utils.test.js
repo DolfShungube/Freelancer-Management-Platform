@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 // Mock supabase client
 vi.mock('../config/superbaseClient.js', () => ({
-  default: {
+  supabase: {
     auth: {
       signInWithPassword: vi.fn(),
       signOut: vi.fn(),
@@ -14,10 +14,10 @@ vi.mock('../config/superbaseClient.js', () => ({
         })),
       })),
     })),
-  },
+  }
 }));
 
-import supabase from '../config/superbaseClient.js';
+import {supabase} from '../config/superbaseClient.js';
 
 // Import the functions but mock showAlert only for mainIcon tests
 import * as utils from '../login/utils.js';

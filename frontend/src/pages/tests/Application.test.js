@@ -52,7 +52,7 @@ describe('Aplication.html', () => {
 
     const header = aplicationsSection.querySelector('h1');
     expect(header).toBeTruthy();
-    expect(header.textContent.toLowerCase()).toContain('aplications');
+    expect(header.textContent.toLowerCase()).toContain('applications');
 
     const aplicantsList = aplicationsSection.querySelector('#myAplicants');
     expect(aplicantsList).toBeTruthy();

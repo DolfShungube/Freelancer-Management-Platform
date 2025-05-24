@@ -1,4 +1,4 @@
-import supabase from "./superbaseClient.js";
+import {supabase} from "./superbaseClient.js";
 
     window.addEventListener('load', async () => {
         const { data: { session } } = await supabase.auth.getSession();      

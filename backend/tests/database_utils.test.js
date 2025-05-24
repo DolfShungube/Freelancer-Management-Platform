@@ -10,9 +10,9 @@ vi.mock('../database/utils.js', async () => {
 });
 
 // Mock the Supabase client
-import superbase from '../config/superbaseClient';
-vi.mock('../config/superbaseClient', () => ({
-  default: {
+import {supabase} from '../config/superbaseClient.js';
+vi.mock('../config/superbaseClient.js', () => ({
+  supabase: {
     from: vi.fn(),
   }
 }));
@@ -36,7 +36,7 @@ describe('Job Service Functions', () => {
       select: vi.fn(),
       eq: vi.fn(),
     };
-    superbase.from.mockImplementation(() => mockFrom);
+    supabase.from.mockImplementation(() => mockFrom);
   });
 
   afterEach(() => {
