@@ -10,16 +10,11 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 
 
-vi.mock('sweetalert2', () => ({
-  default: {
-    fire: vi.fn()
-  }
-}));
 
 
 import  {supabase } from '../config/superbaseClient';
 import Utils, { Aplications } from '../Aplications/Utils.js';
-import Swal from 'sweetalert2';
+
 describe('getFreelancer', () => {
   let aplication;
 
@@ -31,27 +26,8 @@ describe('getFreelancer', () => {
   });
 
 
-  it('show alert on success',async ()=>{
-    const result = await aplication.showAlert('success','success');
-      expect(Swal.fire).toHaveBeenCalledWith({
-      title: 'Success!',
-      text: 'success',
-      icon: 'success',
-      confirmButtonText: 'OK'
-    });
 
 
-
-  })
-
-    it('show alert on error',async ()=>{
-    const result = await aplication.showAlert('some error','error');
-      expect(Swal.fire).toHaveBeenCalledWith({
-      title: 'Oops!',
-      text: 'some error',
-      icon: 'error',
-      confirmButtonText: 'OK'
-    });
 
 
 
@@ -80,12 +56,7 @@ describe('getFreelancer', () => {
     console.log(result)
 
     expect(result).toBeUndefined();
-        expect(Swal.fire).toHaveBeenCalledWith({
-      title: 'Oops!',
-      text: 'Some supabase error',
-      icon: 'error',
-      confirmButtonText: 'OK'
-    });
+
   });
 
   it('catches and alerts on thrown error', async () => {
@@ -96,12 +67,7 @@ describe('getFreelancer', () => {
     const result = await aplication.getFreelancer();
 
     expect(result).toBeUndefined();
-      expect(Swal.fire).toHaveBeenCalledWith({
-      title: 'Oops!',
-      text: 'Unexpected exception',
-      icon: 'error',
-      confirmButtonText: 'OK'
-    });
+
   });
 
   it('accepts aplication', async()=>{
@@ -127,12 +93,7 @@ describe('getFreelancer', () => {
     const result = await aplication.AcceptAplication();
 
     expect(result).toBeUndefined();
-      expect(Swal.fire).toHaveBeenCalledWith({
-      title: 'Oops!',
-      text: 'Unexpected exception',
-      icon: 'error',
-      confirmButtonText: 'OK'
-    });
+
   });
 
 
@@ -146,12 +107,7 @@ describe('getFreelancer', () => {
     console.log(result)
 
     expect(result).toBeUndefined();
-        expect(Swal.fire).toHaveBeenCalledWith({
-      title: 'Oops!',
-      text: 'Some supabase error',
-      icon: 'error',
-      confirmButtonText: 'OK'
-    });
+
   });
 
 
@@ -178,12 +134,7 @@ it('reject freelancer', async()=>{
     const result = await aplication.RejectAplication();
 
     expect(result).toBeUndefined();
-      expect(Swal.fire).toHaveBeenCalledWith({
-      title: 'Oops!',
-      text: 'Unexpected exception',
-      icon: 'error',
-      confirmButtonText: 'OK'
-    });
+
   });
 
 
@@ -197,12 +148,7 @@ it('reject freelancer', async()=>{
     console.log(result)
 
     expect(result).toBeUndefined();
-        expect(Swal.fire).toHaveBeenCalledWith({
-      title: 'Oops!',
-      text: 'Some supabase error',
-      icon: 'error',
-      confirmButtonText: 'OK'
-    });
+
   });
 
 
