@@ -1,5 +1,5 @@
 import {supabase} from '../config/superbaseClient.js'
-import Swal from 'sweetalert2';
+//import Swal from 'sweetalert2';
 //change the below lines to getdocumentbyid if required :)
 
 //const writeNewMessage = document.getElementById('messageInput');
