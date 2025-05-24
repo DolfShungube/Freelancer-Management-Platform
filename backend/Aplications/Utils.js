@@ -1,5 +1,5 @@
 import {supabase} from '../config/superbaseClient.js'
-//import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 //change the below lines to getdocumentbyid if required :)
 const aplicationList= document.querySelector('Aplications')
 //add show alert later
