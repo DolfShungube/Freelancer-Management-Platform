@@ -5,7 +5,7 @@ TEAM
   - Faranani Nemutanzhela         2651532
   - Bokang Madondo                2681261
   - Mashego Mabeloane Gideon      2654606
-  - Mutsawashe Njowo              2651487
+  - Mutsawashe Njowa              2651487
   - Nelson Bhekiswayo             2681283
 
 1. Sprints folder contains sprint documentation according to SCRUM Methodology
