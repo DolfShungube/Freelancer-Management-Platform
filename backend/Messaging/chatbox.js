@@ -127,7 +127,7 @@ messageInput.addEventListener('keydown', (event) => {
         if (messages) {
             chat.addMessagesToPage(messages);
         } else {
-            console.log("No messages found");
+            console.log("No prev messages found");
         }
         } catch (error) {
             console.log("Error loading messages:", error);
