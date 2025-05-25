@@ -1,12 +1,12 @@
 DOCUMENTS WITH PROJECT DETAILS
 
 TEAM
-  Dolf Shungube                 2683067
-  Faranani Nemutanzhela         2651532
-  Bokang Madondo                2681261
-  Mashego Mabeloane Gideon      2654606
-  Mutsawashe Njowo              2651487
-  Nelson Bhekiswayo             2681283
+  - Dolf Shungube                 2683067
+  - Faranani Nemutanzhela         2651532
+  - Bokang Madondo                2681261
+  - Mashego Mabeloane Gideon      2654606
+  - Mutsawashe Njowo              2651487
+  - Nelson Bhekiswayo             2681283
 
 1. Sprints folder contains sprint documentation according to SCRUM Methodology
 2. Additional Artfifacts contains the following submission documents:
