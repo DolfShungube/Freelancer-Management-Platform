@@ -110,7 +110,8 @@ messageInput.addEventListener('keydown', (event) => {
     const { data: userData, error: fetchError1 } = await supabase
     .from("Jobs")
     .select("id")
-    .match({freelancerID:user.id,clientID:clientID});
+    .match({clientID:clientID});
+ //{freelancerID:user.id,clientID:clientID}
 
     if (fetchError1) {
         console.error('Error fetching job data:', fetchError1.message);
