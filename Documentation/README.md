@@ -18,3 +18,4 @@ components and their interactions.
 diagrams, or wireframes, that support the development of our project.
 - Test Plan and Results Document: A document detailing our testing strategy, test cases, and the results of
 our testing efforts. Screenshots or logs of our automated testing will suffice
+-[Video meetings](https://drive.google.com/drive/folders/1147O2t4mFEbILWhDo85ph4wss-ruRFOT?usp=sharing)
