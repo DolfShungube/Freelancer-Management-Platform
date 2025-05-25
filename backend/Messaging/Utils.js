@@ -88,7 +88,7 @@ class Messages {
             console.log("The messages",messages);
 
             if(error){
-                this.showAlert(error.message,'error');
+                this.showAlert("could not find your messeges",'error');
                 return
             }
 
