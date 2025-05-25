@@ -11,7 +11,7 @@ export async function addNewJob(clientID,projectName,projectDescription,amount){
         const {data,error}= await supabase
             .from('Jobs')
             .insert([
-                {clientID: clientID,jobName: projectName,description: projectDescription,assigned:false}
+                {clientID: clientID,jobName: projectName,description: projectDescription,assigned:null}
                      ])
             .select()
 
